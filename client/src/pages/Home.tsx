@@ -335,6 +335,13 @@ export default function Home() {
             <Figure image="image-11-1.png" alt="Diagram showing salt ions shielding negative charges near DNA." caption="02 / Charge shielding" />
             <Figure image="image-14-1.png" alt="Comparison of separated DNA strands with DNA gathered into a precipitate." caption="03 / DNA gathers" />
           </div>
+          <div className="applications-block reveal">
+            <div className="applications-intro"><p className="eyebrow"><span>04</span> / BEYOND THE BEAKER</p><h3>DNA extraction opens up bigger questions.</h3><p>Once DNA is available for analysis, it can support crop research, species identification, diagnosis and forensic work.</p></div>
+            <div className="applications-grid">
+              <article className="application-card"><div className="application-copy"><span>FIELD APPLICATION 01</span><h4>Research &amp; farming</h4><p>DNA analysis supports sequencing, crop breeding and identifying species.</p></div><Figure image="image-19-1.jpg" alt="Laboratory analysis instrument shown in the PowerPoint’s DNA applications slide." caption="SOURCE DIAGRAM / DNA analysis in research" /></article>
+              <article className="application-card"><div className="application-copy"><span>FIELD APPLICATION 02</span><h4>Health &amp; forensics</h4><p>DNA analysis can support diagnosis and forensic identification.</p></div><Figure image="image-19-2.png" alt="Illustration of a DNA analysis readout from the PowerPoint’s applications slide." caption="SOURCE DIAGRAM / Analysis readout" /></article>
+            </div>
+          </div>
         </section>
 
         <section className="starter-section" id="starter" aria-labelledby="starter-title">
@@ -395,6 +402,11 @@ export default function Home() {
               <p className="section-intro">One clear action at a time. Keep the quantities exact, the mixing gentle and the ethanol cold.</p>
             </div>
             <figure className="process-ribbon reveal"><img src={`${media}image-16-1.png`} alt="Five-stage summary: mash strawberry, add detergent and salt, filter pulp, layer ice-cold ethanol and spool DNA fibres." loading="lazy" /><figcaption>THE EXTRACTION / From fruit to fibres, at a glance</figcaption></figure>
+            <section className="demonstration reveal" aria-labelledby="video-title">
+              <div className="demonstration-heading"><div><p className="eyebrow"><span>VIDEO</span> / PRACTICAL DEMONSTRATION</p><h3 id="video-title">Watch the layering<br />and spooling technique.</h3></div><p>Use the clip to observe how to pour the cold ethanol gently and collect fibres at the liquid boundary.</p></div>
+              <div className="video-frame"><iframe src="https://www.youtube.com/embed/W1DVEtzrl9g?feature=oembed" title="Strawberry DNA extraction demonstration: layering ethanol and spooling DNA fibres" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+              <div className="video-foot"><span>POWERPOINT VIDEO LINK / YOUTUBE</span><a href="https://www.youtube.com/watch?v=W1DVEtzrl9g" target="_blank" rel="noreferrer">Open the video on YouTube <ArrowUpRight size={16} /></a></div>
+            </section>
             <ol className="timeline-list">
               {steps.map((step) => (
                 <li className="timeline-step reveal" key={step.number}>
