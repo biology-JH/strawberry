@@ -63,51 +63,72 @@ const scienceTabs: Array<{
 const steps = [
   {
     number: "01",
-    label: "Break up the tissue",
-    title: "Mash one hulled strawberry.",
-    action: "Seal one hulled strawberry in a clean bag and mash it gently for two minutes.",
-    reason: "Mashing breaks up the fruit tissue. Avoid vigorous blending: excess foam and finely shredded pulp make later separation harder.",
-    check: "The fruit should be thoroughly crushed, without whipping air into it.",
+    label: "Mash the fruit",
+    title: "Mash one hulled strawberry gently.",
+    instructions: [
+      "Place one hulled strawberry in a clean, sealable bag and close the seal.",
+      "Mash gently for two minutes, until the fruit is thoroughly crushed.",
+      "Use steady pressure rather than whipping air into the mixture; foam and very fine pulp make filtering harder.",
+    ],
+    reason: "Mashing breaks up the fruit tissue. The plant cell wall is a barrier; the detergent used later disrupts membranes, not the wall.",
+    check: "The fruit is crushed and no longer whole, but the mixture is not frothy.",
     image: "image-8-1.png",
     alt: "Three-stage illustration showing a whole strawberry, gentle mashing and crushed fruit.",
   },
   {
     number: "02",
-    label: "Prepare the lysis buffer",
-    title: "Mix the buffer, then add it to the fruit.",
-    action: "Stir 90 cm³ water, 10 cm³ detergent and 3 g salt gently until the salt dissolves. Add 10 cm³ of this buffer to the mashed fruit.",
+    label: "Prepare the buffer",
+    title: "Mix the buffer, then measure out 10 cm³.",
+    instructions: [
+      "Measure 90 cm³ water and 10 cm³ detergent into a clean container.",
+      "Add 3 g salt and stir gently until the salt dissolves; avoid making foam.",
+      "Measure 10 cm³ of the prepared buffer and add it to the mashed strawberry.",
+    ],
     reason: "Detergent disrupts the cell membrane and nuclear envelope. Salt ions shield some of DNA’s negative charge so strands repel each other less.",
-    check: "Stir gently; foam can make the later separation harder.",
+    check: "The salt has dissolved, and exactly 10 cm³ of buffer is added to the fruit.",
     image: "image-9-1.png",
     alt: "Illustration of water, detergent and salt being combined into a lysis buffer.",
   },
   {
     number: "03",
-    label: "Separate the pulp",
-    title: "Filter the mixture into a clean tube.",
-    action: "Line a funnel with gauze and slowly pour the mixture through it into a clean tube.",
+    label: "Filter the mixture",
+    title: "Separate pulp from the liquid filtrate.",
+    instructions: [
+      "Place gauze in a funnel and position it over a clean tube.",
+      "Pour the strawberry-and-buffer mixture slowly onto the gauze.",
+      "Collect the liquid that passes through. The larger fruit pulp remains on the gauze.",
+    ],
     reason: "The gauze retains much of the fruit pulp while the liquid filtrate—and dissolved cell contents—passes through.",
-    check: "If the filtrate is very pulpy, let it drain rather than squeezing the gauze.",
+    check: "The tube holds liquid filtrate; most visible pulp is still in the gauze.",
     image: "image-12-1.png",
     alt: "A hand pours strawberry mixture through gauze in a funnel while the filtrate collects in a tube.",
   },
   {
     number: "04",
-    label: "Make DNA precipitate",
-    title: "Layer cold ethanol over the filtrate.",
-    action: "Measure 5 cm³ of filtrate. Slowly add an equal volume of ice-cold ethanol down the inside of the tube, keeping the two liquid layers separate.",
+    label: "Layer cold ethanol",
+    title: "Add an equal volume without mixing the layers.",
+    instructions: [
+      "Measure 5 cm³ of filtrate into a clean tube.",
+      "Measure 5 cm³ of ice-cold ethanol—the same volume as the filtrate.",
+      "Slowly run the ethanol down the inside wall of the tube. It should sit above the filtrate; do not shake or stir.",
+      "Look along the boundary between the two liquids for pale, stringy fibres.",
+    ],
     reason: "DNA dissolves poorly in cold ethanol. With salt present, it gathers into pale fibres at the boundary between the layers.",
-    check: "Ethanol is flammable: keep it capped, cold and away from flames, and follow your teacher’s instructions.",
+    check: "The layers remain distinct. Keep ethanol cold, capped and away from flames; follow your teacher’s instructions.",
     image: "image-13-1.png",
     alt: "Layered tube showing ice-cold ethanol above strawberry filtrate with pale DNA fibres at the boundary.",
   },
   {
     number: "05",
     label: "Collect the fibres",
-    title: "Spool DNA at the liquid boundary.",
-    action: "Touch a clean glass rod to the boundary and turn it slowly in one direction to wind up the pale, stringy material.",
+    title: "Spool the fibres from the liquid boundary.",
+    instructions: [
+      "Use a clean glass rod and gently touch its tip to the boundary between the two layers.",
+      "Turn the rod slowly in one direction to wind the pale, stringy material around it.",
+      "Describe the colour, texture and location of what you collected.",
+    ],
     reason: "The fibres are precipitated material from a crude extract; they are not proof of pure DNA by sight alone.",
-    check: "Describe the fibres you observe—colour, texture and where they formed.",
+    check: "The glass rod is intact, and your notes describe what you observed without claiming the sample is pure.",
     image: "image-15-1.png",
     alt: "Tube and glass rod illustration showing pale precipitated DNA fibres being collected.",
   },
@@ -136,6 +157,31 @@ const anatomyLayers = [
   { name: "Cell wall", detail: "A sturdy outer boundary around the plant cell. Detergent does not dissolve it; mashing helps break up the tissue and cell walls." },
   { name: "Cell membrane", detail: "A membrane around the cell contents. Detergent disrupts it, allowing contents to mix into the liquid." },
   { name: "Nuclear envelope", detail: "A membrane around the nucleus, where the DNA is packaged. Detergent disrupts this membrane too." },
+];
+
+const powerpointImages = [
+  { file: "BG1-image-1.jpeg", title: "Pale cloud slide background", alt: "Pale blue presentation background with soft white clouds at the right and lower edges." },
+  { file: "BG2-image-1.jpeg", title: "Alternate cloud slide background", alt: "Pale blue presentation background with soft white cloud shapes." },
+  { file: "image-1-1.jpg", title: "The strawberry specimen", alt: "Close-up photograph of a ripe red strawberry." },
+  { file: "image-3-1.png", title: "Chromosome sets", alt: "PowerPoint comparison of chromosome sets, highlighting the cultivated strawberry's octoploid eight-set condition." },
+  { file: "image-5-1.png", title: "Plant-cell layers", alt: "Plant-cell anatomy illustration showing the cell wall, cell membrane and nuclear envelope around the nucleus." },
+  { file: "image-7-1.png", title: "Laboratory workspace", alt: "Wide laboratory workspace photograph used as the source presentation's practical background." },
+  { file: "image-8-1.png", title: "Mashing the fruit", alt: "Three-stage picture showing a strawberry before, during and after mashing." },
+  { file: "image-9-1.png", title: "Lysis-buffer ingredients", alt: "Illustration of water, detergent and salt being combined for the extraction buffer." },
+  { file: "image-10-1.png", title: "Membrane disruption", alt: "Diagram illustrating detergent disrupting a cell membrane and releasing contents." },
+  { file: "image-11-1.png", title: "Salt shields charge", alt: "Diagram of salt ions near negatively charged DNA strands." },
+  { file: "image-12-1.png", title: "Filtering the pulp", alt: "Illustration of strawberry mixture passing through gauze in a funnel into a tube." },
+  { file: "image-13-1.png", title: "Two liquid layers", alt: "Tube illustration with ethanol over filtrate and pale fibres appearing at the boundary." },
+  { file: "image-14-1.png", title: "DNA strands gather", alt: "Diagram comparing separated DNA strands with strands gathered together." },
+  { file: "image-15-1.png", title: "Spooling the fibres", alt: "Illustration of a glass rod winding pale fibres from a tube." },
+  { file: "image-16-1.png", title: "Extraction overview", alt: "Wide workflow illustration summarizing the strawberry DNA extraction stages." },
+  { file: "image-17-1.jpg", title: "Original practical title image", alt: "PowerPoint cover image reading Strawberry DNA Extraction above a large strawberry illustration." },
+  { file: "image-18-1.png", title: "What else is in the extract?", alt: "Tube diagram showing that a crude extract can contain DNA, RNA, proteins and cell-wall material." },
+  { file: "image-19-1.jpg", title: "DNA-analysis instrument", alt: "Laboratory analysis instrument pictured in the PowerPoint's DNA applications slide." },
+  { file: "image-19-2.png", title: "DNA-analysis readout", alt: "Illustrated analysis readout shown in the PowerPoint's applications slide." },
+  { file: "image-22-1.png", title: "Question prompt bubble", alt: "Large empty speech bubble used as a question-prompt graphic in the source slides." },
+  { file: "image-22-2.png", title: "Extraction concept map", alt: "Source-slide sequence connecting water and detergent, strawberry mashing, filtering and DNA collection." },
+  { file: "image-23-1.png", title: "Question prompt bubble variation", alt: "Large empty speech bubble repeated as a prompt graphic on a later source slide." },
 ];
 
 function useScrollReveal() {
@@ -399,8 +445,15 @@ export default function Home() {
           <div className="section-wrap">
             <div className="section-heading section-heading-row reveal">
               <div><p className="eyebrow"><span>06</span> / THE PRACTICAL</p><h2 id="method-title">Five moves<br />to <em>visible DNA.</em></h2></div>
-              <p className="section-intro">One clear action at a time. Keep the quantities exact, the mixing gentle and the ethanol cold.</p>
+              <p className="section-intro">Start with the kit checklist, then follow each numbered mini-step in order. Keep the filtrate and ethanol layers separate.</p>
             </div>
+            <section className="materials-prep reveal" aria-labelledby="prep-title">
+              <div className="materials-prep-heading"><p className="eyebrow"><span>BEFORE STEP 01</span> / SET UP</p><h3 id="prep-title">Get every material ready first.</h3><p>Prepare the buffer before it touches the fruit. Measure slowly and keep the work area clear.</p></div>
+              <div className="prep-inventory">
+                <article><h4>Reagents</h4><ul><li>One hulled strawberry</li><li>90 cm³ water</li><li>10 cm³ detergent</li><li>3 g salt</li><li>Ice-cold ethanol: 5 cm³ for each 5 cm³ filtrate</li></ul></article>
+                <article><h4>Equipment &amp; safety</h4><ul><li>Sealable bag</li><li>Gauze-lined funnel and clean tube</li><li>Clean glass rod</li><li>Wear goggles; keep ethanol capped, cold and away from flames.</li></ul></article>
+              </div>
+            </section>
             <figure className="process-ribbon reveal"><img src={`${media}image-16-1.png`} alt="Five-stage summary: mash strawberry, add detergent and salt, filter pulp, layer ice-cold ethanol and spool DNA fibres." loading="lazy" /><figcaption>THE EXTRACTION / From fruit to fibres, at a glance</figcaption></figure>
             <section className="demonstration reveal" aria-labelledby="video-title">
               <div className="demonstration-heading"><div><p className="eyebrow"><span>VIDEO</span> / PRACTICAL DEMONSTRATION</p><h3 id="video-title">Watch the layering<br />and spooling technique.</h3></div><p>Use the clip to observe how to pour the cold ethanol gently and collect fibres at the liquid boundary.</p></div>
@@ -414,7 +467,9 @@ export default function Home() {
                   <article className="step-card">
                     <div className="step-topline"><span className="step-label">{step.label}</span><span className="step-time">STEP {step.number}</span></div>
                     <h3>{step.title}</h3>
-                    <p className="step-action">{step.action}</p>
+                    <ol className="step-instructions" aria-label={`Detailed instructions: ${step.label}`}>
+                      {step.instructions.map((instruction, index) => <li key={instruction}><span>{String(index + 1).padStart(2, "0")}</span><p>{instruction}</p></li>)}
+                    </ol>
                     <div className="step-reason"><span>WHY IT MATTERS</span><p>{step.reason}</p></div>
                     <Figure image={step.image} alt={step.alt} caption={`STEP ${step.number} / ${step.label.toUpperCase()}`} className="step-figure" />
                     <div className="step-check"><Check size={16} /><span><b>Bench check</b> {step.check}</span></div>
@@ -457,6 +512,18 @@ export default function Home() {
             </div>
             <div className="limits-note reveal"><span className="limits-icon"><Sparkles size={18} /></span><p><b>Keep the claim careful.</b> The white material is a crude extract and may contain RNA, proteins and cell-wall material. Enzymes can break DNA down; cold slows this process. Seeing fibres does not show that the sample is pure DNA.</p></div>
             <Figure image="image-18-1.png" alt="Tube illustration labelling DNA, RNA, proteins and cell-wall debris in a crude strawberry extract." caption="LIMITS / A visible extract can contain DNA alongside other cell material." className="limits-figure reveal" />
+          </div>
+        </section>
+        <section className="source-archive section-wrap" id="source-archive" aria-labelledby="archive-title">
+          <div className="section-heading section-heading-row reveal">
+            <div><p className="eyebrow"><span>08</span> / SOURCE PICTURES</p><h2 id="archive-title">Every picture<br />from the <em>PowerPoint.</em></h2></div>
+            <p className="section-intro">Browse all 22 images extracted from the supplied slide deck. Key diagrams also appear beside the science and method they explain.</p>
+          </div>
+          <div className="source-image-grid">
+            {powerpointImages.map((image, index) => <figure className="source-image-card reveal" key={image.file}>
+              <img src={`${media}${image.file}`} alt={image.alt} loading="lazy" />
+              <figcaption><span>{String(index + 1).padStart(2, "0")}</span><span>{image.title}</span></figcaption>
+            </figure>)}
           </div>
         </section>
       </main>

@@ -529,3 +529,74 @@ body .site-shell :is(p, a, button, li, td, th, figcaption, small, span, div, lab
   .button { padding-inline: 14px; }
   .quiz-option { padding: 13px; }
 }
+
+
+/* Rebalance page illustrations to half the previous display footprint. */
+body .site-shell .image-plate img { width: 50%; height: auto; max-height: 380px; margin-inline: auto; object-fit: contain; }
+body .site-shell .mechanism-art-row .image-plate img { width: 50%; max-height: 380px; }
+body .site-shell .application-card .image-plate img { width: 50%; max-height: 325px; }
+body .site-shell .process-ribbon img { display: block; width: 50%; max-height: 270px; margin-inline: auto; object-fit: contain; }
+
+/* Larger long-form copy improves readability while small labels remain secondary. */
+body .site-shell :is(p:not(.eyebrow), li, td, th) { font-size: max(30px, 1em); line-height: 1.5; }
+.objective-card h3, .final-quiz-heading h3, .troubleshoot h3, .step-card h3, .starter-question h3 { font-size: 32px; }
+.science-panel-copy h3 { font-size: clamp(32px, 4vw, 48px); }
+.application-copy h4, .materials-prep h4 { font-size: 32px; }
+.image-plate figcaption { min-height: 0; font-size: 24px; line-height: 1.4; }
+
+/* Method setup and numbered sub-actions. */
+.materials-prep { margin: 0 0 34px; padding: clamp(22px, 4vw, 42px); display: grid; grid-template-columns: minmax(230px,.8fr) minmax(0,1.2fr); gap: clamp(22px, 4vw, 54px); background: #f1efe8; border: 1px solid rgba(32,48,48,.1); }
+.materials-prep-heading h3 { margin: 0 0 12px; font-size: clamp(32px, 3.5vw, 42px); letter-spacing: -.05em; line-height: 1.08; }
+.materials-prep-heading > p:last-child { margin: 0; color: var(--muted); }
+.prep-inventory { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+.prep-inventory article { padding: 19px 21px; background: #fff; border: 1px solid rgba(32,48,48,.1); }
+.prep-inventory h4 { margin: 0 0 12px; color: var(--berry-deep); }
+.prep-inventory ul { margin: 0; padding-left: 28px; }
+.prep-inventory li { margin: 0 0 9px; }
+.prep-inventory li:last-child { margin-bottom: 0; }
+.step-instructions { margin: 17px 0 22px; padding: 0; list-style: none; display: grid; gap: 13px; }
+.step-instructions li { display: grid; grid-template-columns: 42px minmax(0,1fr); align-items: start; gap: 14px; }
+.step-instructions li > span { width: 40px; height: 40px; display: grid; place-items: center; color: var(--berry-deep); background: #f5e7e2; border-radius: 50%; font: 24px var(--mono); }
+.step-instructions p { margin: 0; color: var(--ink); }
+.step-reason { align-items: flex-start; }
+.step-reason p { font-size: 30px; line-height: 1.5; }
+.step-check { align-items: flex-start; }
+.step-check span { line-height: 1.5; }
+
+/* A two-column source gallery keeps each original image around half-page width. */
+.source-archive { padding-top: clamp(76px, 9vw, 124px); padding-bottom: clamp(76px, 9vw, 124px); border-top: 1px solid var(--line); }
+.source-archive .section-heading { margin-bottom: 32px; }
+.source-image-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+.source-image-card { min-width: 0; margin: 0; padding: 17px; background: #fff; border: 1px solid rgba(32,48,48,.12); }
+.source-image-card img { display: block; width: 100%; height: 320px; object-fit: contain; background: #f4f2ec; }
+.source-image-card figcaption { min-height: 72px; padding-top: 13px; display: grid; grid-template-columns: 44px minmax(0,1fr); align-items: start; gap: 12px; color: var(--ink); font: 24px/1.4 "DM Sans", sans-serif; }
+.source-image-card figcaption span:first-child { color: var(--berry-deep); font: 24px var(--mono); }
+
+/* Gentle motion gives the 8n badge a living, strand-like pulse. */
+.hero-stamp { animation: dna-bob 6s ease-in-out infinite; }
+.hero-stamp::after { position: absolute; inset: -12px; content: ""; border: 2px solid rgba(244,119,113,.5); border-radius: 50%; animation: dna-halo 3.2s ease-out infinite; pointer-events: none; }
+.orbit-two { animation: orbit-breathe 7s ease-in-out infinite; }
+@keyframes dna-bob { 0%,100% { transform: rotate(-9deg) translateY(0); } 50% { transform: rotate(-6deg) translateY(-10px); } }
+@keyframes dna-halo { 0% { transform: scale(.94); opacity: .65; } 100% { transform: scale(1.28); opacity: 0; } }
+@keyframes orbit-breathe { 0%,100% { opacity: .42; } 50% { opacity: .9; } }
+
+@media (max-width: 900px) {
+  .materials-prep { grid-template-columns: 1fr; }
+  .source-image-card img { height: 270px; }
+}
+
+@media (max-width: 640px) {
+  .materials-prep { padding: 18px; }
+  .prep-inventory { grid-template-columns: 1fr; }
+  .step-instructions li { grid-template-columns: 36px minmax(0,1fr); gap: 10px; }
+  .step-instructions li > span { width: 36px; height: 36px; }
+  .source-image-grid { grid-template-columns: 1fr; }
+  .source-image-card img { width: 50%; height: 210px; margin-inline: auto; }
+  .source-image-card figcaption { min-height: 60px; }
+  .materials-prep-heading h3 { font-size: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stamp, .hero-stamp::after, .orbit-two { animation: none !important; }
+  .hero-stamp::after { transform: scale(1.05); opacity: .25; }
+}
