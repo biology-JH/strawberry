@@ -184,6 +184,44 @@ const powerpointImages = [
   { file: "image-23-1.png", title: "Question prompt bubble variation", alt: "Large empty speech bubble repeated as a prompt graphic on a later source slide." },
 ];
 
+const methodQuestions = [
+  {
+    id: "mashing",
+    prompt: "Why mash the strawberry gently for two minutes?",
+    options: ["To break up the fruit tissue while limiting foam and very fine pulp.", "To dissolve the cell wall using detergent.", "To precipitate the DNA before filtering."],
+    correctIndex: 0,
+    explanation: "Mashing breaks up the tissue. Vigorous blending can add foam and create very fine pulp that makes separation harder.",
+  },
+  {
+    id: "detergent",
+    prompt: "What does detergent do in this practical?",
+    options: ["It dissolves the plant cell wall.", "It disrupts the cell membrane and nuclear envelope.", "It makes DNA positively charged."],
+    correctIndex: 1,
+    explanation: "Detergent disrupts membranes around the cell and nucleus. It does not dissolve the cell wall; mashing helps break up the tissue.",
+  },
+  {
+    id: "buffer-volume",
+    prompt: "How much prepared buffer is added to the mashed fruit?",
+    options: ["5 cm³", "10 cm³", "100 cm³"],
+    correctIndex: 1,
+    explanation: "Prepare the buffer from 90 cm³ water, 10 cm³ detergent and 3 g salt, then measure out 10 cm³ for the mashed fruit.",
+  },
+  {
+    id: "ethanol-layer",
+    prompt: "How should the cold ethanol be added?",
+    options: ["Pour an equal volume quickly, then shake the tube.", "Slowly add an equal volume down the tube wall and keep the layers separate.", "Add a few drops while stirring the filtrate."],
+    correctIndex: 1,
+    explanation: "Use 5 cm³ ethanol for 5 cm³ filtrate. Add it slowly so the ethanol remains as a separate upper layer above the filtrate.",
+  },
+  {
+    id: "visible-fibres",
+    prompt: "What can you conclude when pale fibres appear?",
+    options: ["The fibres prove the sample is pure DNA.", "A crude extract has precipitated; appearance alone cannot prove purity.", "The cell wall has turned into DNA."],
+    correctIndex: 1,
+    explanation: "The visible material can include DNA alongside RNA, proteins and cell-wall material. Describe what you saw, but do not claim it is pure DNA by sight alone.",
+  },
+];
+
 function useScrollReveal() {
   useEffect(() => {
     const blocks = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
@@ -238,8 +276,14 @@ export default function Home() {
   const [quizChoice, setQuizChoice] = useState("");
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [troubleshootingOpen, setTroubleshootingOpen] = useState(false);
+  const [methodSelections, setMethodSelections] = useState<Record<string, number>>({});
+  const [checkedMethodQuestions, setCheckedMethodQuestions] = useState<string[]>([]);
 
   const selectedScience = scienceTabs.find((tab) => tab.id === activeTab)!;
+  const checkedMethodCount = checkedMethodQuestions.length;
+  const correctMethodCount = methodQuestions.filter((question) =>
+    checkedMethodQuestions.includes(question.id) && methodSelections[question.id] === question.correctIndex,
+  ).length;
   const toggleWhoAmI = (index: number) => {
     setRevealedCards((current) =>
       current.includes(index) ? current.filter((item) => item !== index) : [...current, index],
@@ -249,6 +293,14 @@ export default function Home() {
     setRevealedLayers((current) =>
       current.includes(index) ? current.filter((item) => item !== index) : [...current, index],
     );
+  };
+  const selectMethodAnswer = (questionId: string, optionIndex: number) => {
+    setMethodSelections((current) => ({ ...current, [questionId]: optionIndex }));
+    setCheckedMethodQuestions((current) => current.filter((id) => id !== questionId));
+  };
+  const checkMethodAnswer = (questionId: string) => {
+    if (methodSelections[questionId] === undefined) return;
+    setCheckedMethodQuestions((current) => current.includes(questionId) ? current : [...current, questionId]);
   };
   const handleTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
@@ -477,6 +529,38 @@ export default function Home() {
                 </li>
               ))}
             </ol>
+            <section className="method-checks reveal" aria-labelledby="method-check-title">
+              <div className="method-checks-heading">
+                <div><p className="eyebrow eyebrow-light"><span>PAUSE &amp; PREDICT</span> / RETRIEVAL CHECK</p><h3 id="method-check-title">Think it through.<br /><em>Then check.</em></h3><p>Choose one answer for each question. The answer and explanation stay hidden until you select “Check answer”.</p></div>
+                <p className="method-check-score" aria-live="polite">{checkedMethodCount} / {methodQuestions.length} checked<br /><strong>{correctMethodCount} correct</strong></p>
+              </div>
+              <div className="method-question-grid">
+                {methodQuestions.map((question, questionIndex) => {
+                  const selected = methodSelections[question.id];
+                  const isChecked = checkedMethodQuestions.includes(question.id);
+                  const isCorrect = selected === question.correctIndex;
+                  const feedbackId = `method-answer-${question.id}`;
+                  return <article className={`method-question-card ${isChecked ? (isCorrect ? "is-correct" : "needs-review") : ""}`} key={question.id}>
+                    <div className="method-question-kicker"><span>QUESTION 0{questionIndex + 1}</span><span>{isChecked ? (isCorrect ? "CORRECT" : "REVIEW") : "NOT YET CHECKED"}</span></div>
+                    <h4>{question.prompt}</h4>
+                    <div className="method-options" role="group" aria-label={`Answer choices for question ${questionIndex + 1}`}>
+                      {question.options.map((option, optionIndex) => {
+                        const isSelected = selected === optionIndex;
+                        const isRightAnswer = isChecked && optionIndex === question.correctIndex;
+                        const isWrongChoice = isChecked && isSelected && !isCorrect;
+                        return <button className={`method-option ${isSelected ? "is-selected" : ""} ${isRightAnswer ? "is-right-answer" : ""} ${isWrongChoice ? "is-wrong-choice" : ""}`} key={option} type="button" aria-pressed={isSelected} onClick={() => selectMethodAnswer(question.id, optionIndex)}>
+                          <span>{String.fromCharCode(65 + optionIndex)}</span>{option}
+                        </button>;
+                      })}
+                    </div>
+                    <button className="method-check-button" type="button" disabled={selected === undefined} aria-expanded={isChecked} aria-controls={feedbackId} onClick={() => checkMethodAnswer(question.id)}>{isChecked ? "Answer checked · choose again to retry" : "Check answer"}<ArrowRight size={17} /></button>
+                    <div className={`method-feedback ${isCorrect ? "is-correct" : "needs-review"}`} id={feedbackId} hidden={!isChecked} role="status" aria-live="polite">
+                      {isChecked && <><strong>{isCorrect ? "That’s right." : "Not quite—here is the answer."}</strong><p><b>Best answer:</b> {question.options[question.correctIndex]}</p><p>{question.explanation}</p></>}
+                    </div>
+                  </article>;
+                })}
+              </div>
+            </section>
             <div className="method-endnote reveal"><span className="endnote-mark">OBSERVE</span><p>Write down where the fibres formed and what they looked like. A visible precipitate is a useful observation—not a purity test.</p><ArrowRight size={18} /></div>
           </div>
         </section>
