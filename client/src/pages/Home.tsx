@@ -394,8 +394,7 @@ export default function Home() {
 
         <section className="mechanisms section-wrap" aria-labelledby="mechanism-title">
           <div className="section-heading section-heading-row reveal">
-            <div><p className="eyebrow"><span>03</span> / REAGENT LOGIC</p><h2 id="mechanism-title">The chemistry<br />behind the <em>fibres.</em></h2></div>
-            <p className="section-intro">Three mechanisms help move DNA from a cell into a visible, collectable form.</p>
+            <div className="mechanisms-heading-copy"><p className="eyebrow"><span>03</span> / REAGENT LOGIC</p><h2 id="mechanism-title">The chemistry<br />behind the <em>fibres.</em></h2><p className="section-intro">Three mechanisms help move DNA from a cell into a visible, collectable form.</p></div>
           </div>
           <div className="mechanism-table-wrap reveal" role="region" aria-label="Biochemical mechanism matrix" tabIndex={0}>
             <table className="mechanism-table">
@@ -426,7 +425,7 @@ export default function Home() {
         <section className="starter-section" id="starter" aria-labelledby="starter-title">
           <div className="starter-inner section-wrap">
             <div className="starter-topline"><p className="eyebrow eyebrow-light"><span>04</span> / STARTER</p><span className="starter-chip"><CircleHelp size={14} /> PREDICT BEFORE YOU REVEAL</span></div>
-            <div className="starter-headline"><h2 id="starter-title">What gets<br /><em>in the way?</em></h2><p>Before the practical, trace a route from the fruit tissue to the DNA inside the nucleus.</p></div>
+            <div className="starter-headline"><h2 id="starter-title">What gets <em>in the way?</em></h2><p>Before the practical, trace a route from the fruit tissue to the DNA inside the nucleus.</p></div>
             <button className="accordion-trigger starter-trigger" type="button" aria-expanded={starterOpen} aria-controls="starter-panel" onClick={() => setStarterOpen((open) => !open)}>
               <span><b>{starterOpen ? "Close the starter" : "Open the starter"}</b><small>Cell anatomy · 2-minute prediction</small></span><span className="trigger-icon"><ChevronDown size={20} /></span>
             </button>
@@ -457,8 +456,7 @@ export default function Home() {
 
         <section className="safety-section section-wrap" id="safety" aria-labelledby="safety-title">
           <div className="section-heading section-heading-row reveal">
-            <div><p className="eyebrow"><span>05</span> / SAFETY CHECK</p><h2 id="safety-title">Good science starts <em>carefully.</em></h2></div>
-            <p className="section-intro">Read the control before handling each material. Follow your teacher’s local instructions.</p>
+            <div className="safety-heading-copy"><p className="eyebrow"><span>05</span> / SAFETY CHECK</p><h2 id="safety-title">Good science starts <em>carefully.</em></h2><p className="section-intro">Read the control before handling each material. Follow your teacher’s local instructions.</p></div>
           </div>
           <div className="risk-table-wrap reveal" role="region" aria-label="Risk assessment and controls" tabIndex={0}>
             <table className="risk-table">

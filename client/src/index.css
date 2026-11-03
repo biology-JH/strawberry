@@ -928,3 +928,90 @@ body .site-shell .risk-table td p { font-size: 21px; }
   .step-reason > span, .step-observe > span { font-size: 18px; }
   .troubleshoot-label { font-size: 18px; }
 }
+
+
+/* Larger glossary cards and consistent, easy-to-scan teaching labels. */
+body .site-shell .vocabulary-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 12px;
+  padding-top: 30px;
+  font-size: 20px;
+  line-height: 1.45;
+}
+body .site-shell .vocabulary-strip > .vocab-label {
+  grid-column: 1 / -1;
+  color: var(--berry-deep);
+  font: 700 20px/1.2 var(--mono);
+  letter-spacing: .08em;
+}
+body .site-shell .vocabulary-strip > span:not(.vocab-label) {
+  display: block;
+  padding: 16px 18px;
+  white-space: normal;
+  color: #4b5b56;
+  background: #f2f0e9;
+  border-left: 3px solid #a63842;
+  border-radius: 0 8px 8px 0;
+  font-size: 20px;
+}
+body .site-shell .vocabulary-strip b {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ink);
+  font-size: 23px;
+  line-height: 1.2;
+}
+.eyebrow { font-size: 14px; line-height: 1.35; }
+.objective-tag, .endnote-mark { font-size: 18px; font-weight: 700; }
+.final-quiz-heading .eyebrow { font-size: 18px; line-height: 1.35; }
+.method-checks-heading .eyebrow { font-size: 16px; }
+.who-card-top { font-size: 15px; }
+.starter-chip { font-size: 14px; }
+.application-copy > span { font-size: 14px; }
+
+/* Keep short explanatory copy directly under the heading it belongs to. */
+.mechanisms .section-heading-row,
+.safety-section .section-heading-row {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.mechanisms-heading-copy { width: 100%; max-width: 820px; }
+.mechanisms-heading-copy .section-intro {
+  max-width: none;
+  margin: 16px 0 0;
+  font-size: 23px;
+  line-height: 1.5;
+}
+.safety-heading-copy { width: 100%; max-width: 820px; }
+.safety-heading-copy h2 { font-size: clamp(42px, 5.2vw, 68px); }
+body .site-shell .safety-heading-copy .section-intro {
+  max-width: none;
+  margin: 16px 0 0;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+/* Keep the Starter question in one row on wide screens; allow natural wrapping on phones. */
+.starter-headline h2 { white-space: nowrap; font-size: clamp(42px, 5.2vw, 70px); }
+@media (max-width: 900px) {
+  body .site-shell .vocabulary-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .starter-headline { align-items: flex-start; flex-direction: column; gap: 16px; }
+}
+@media (max-width: 640px) {
+  body .site-shell .vocabulary-strip { grid-template-columns: 1fr; gap: 10px; padding-top: 22px; font-size: 19px; }
+  body .site-shell .vocabulary-strip > .vocab-label { font-size: 18px; }
+  body .site-shell .vocabulary-strip > span:not(.vocab-label) { padding: 14px 16px; font-size: 19px; }
+  body .site-shell .vocabulary-strip b { font-size: 21px; }
+  .eyebrow { font-size: 13px; }
+  .objective-tag, .endnote-mark { font-size: 16px; }
+  .final-quiz-heading .eyebrow { font-size: 16px; }
+  .method-checks-heading .eyebrow { font-size: 14px; }
+  .who-card-top { font-size: 14px; }
+  .starter-chip, .application-copy > span { font-size: 12px; }
+  .mechanisms-heading-copy .section-intro { font-size: 20px; }
+  .safety-heading-copy h2 { font-size: clamp(36px, 9vw, 50px); }
+  body .site-shell .safety-heading-copy .section-intro { font-size: 20px; }
+  .starter-headline h2 { white-space: normal; font-size: clamp(44px, 11vw, 62px); }
+}
