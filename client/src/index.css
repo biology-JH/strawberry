@@ -560,15 +560,6 @@ body .site-shell p:not(.eyebrow), body .site-shell td, body .site-shell th { fon
 .step-check { align-items: flex-start; }
 .step-check span { line-height: 1.5; }
 
-/* A two-column source gallery keeps each original image around half-page width. */
-.source-archive { padding-top: clamp(76px, 9vw, 124px); padding-bottom: clamp(76px, 9vw, 124px); border-top: 1px solid var(--line); }
-.source-archive .section-heading { margin-bottom: 32px; }
-.source-image-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
-.source-image-card { min-width: 0; margin: 0; padding: 17px; background: #fff; border: 1px solid rgba(32,48,48,.12); }
-.source-image-card img { display: block; width: 100%; height: 320px; object-fit: contain; background: #f4f2ec; }
-.source-image-card figcaption { min-height: 72px; padding-top: 13px; display: grid; grid-template-columns: 44px minmax(0,1fr); align-items: start; gap: 12px; color: var(--ink); font: 24px/1.4 "DM Sans", sans-serif; }
-.source-image-card figcaption span:first-child { color: var(--berry-deep); font: 24px var(--mono); }
-
 /* Gentle motion gives the 8n badge a living, strand-like pulse. */
 .hero-stamp { animation: dna-bob 6s ease-in-out infinite; }
 .hero-stamp::after { position: absolute; inset: -12px; content: ""; border: 2px solid rgba(244,119,113,.5); border-radius: 50%; animation: dna-halo 3.2s ease-out infinite; pointer-events: none; }
@@ -579,7 +570,6 @@ body .site-shell p:not(.eyebrow), body .site-shell td, body .site-shell th { fon
 
 @media (max-width: 900px) {
   .materials-prep { grid-template-columns: 1fr; }
-  .source-image-card img { height: 270px; }
 }
 
 @media (max-width: 640px) {
@@ -587,9 +577,6 @@ body .site-shell p:not(.eyebrow), body .site-shell td, body .site-shell th { fon
   .prep-inventory { grid-template-columns: 1fr; }
   .step-instructions li { grid-template-columns: 36px minmax(0,1fr); gap: 10px; }
   .step-instructions li > span { width: 36px; height: 36px; }
-  .source-image-grid { grid-template-columns: 1fr; }
-  .source-image-card img { width: 50%; height: 210px; margin-inline: auto; }
-  .source-image-card figcaption { min-height: 60px; }
   .materials-prep-heading h3 { font-size: 32px; }
 }
 
@@ -606,20 +593,11 @@ body .site-shell .application-card .image-plate img { width: 65%; max-height: 42
 body .site-shell .process-ribbon img { width: 65%; max-height: 351px; }
 .site-header { position: sticky; top: 0; background: rgba(251,250,247,.93); backdrop-filter: blur(14px); }
 .section-heading h2, .starter-headline h2, .plenary-section h2 { text-wrap: balance; }
-.objective-card, .step-card, .image-plate, .source-image-card, .application-card { border-radius: 10px; }
+.objective-card, .step-card, .image-plate, .application-card { border-radius: 10px; }
 .objective-card { transition: background .25s ease, transform .25s ease; }
 .objective-card:hover { background: rgba(255,255,255,.7); transform: translateY(-3px); }
 .step-card { box-shadow: 0 8px 28px rgba(28,45,42,.055); }
 .image-plate { box-shadow: 0 8px 24px rgba(28,45,42,.06); }
-
-/* One image per editorial archive row; image area is 30% larger than the former half-width tile. */
-.source-image-grid { grid-template-columns: 1fr; gap: 20px; }
-.source-image-card { display: grid; grid-template-columns: minmax(0,65fr) minmax(220px,35fr); align-items: center; gap: clamp(18px,3vw,36px); padding: clamp(17px,2.4vw,28px); border-radius: 12px; box-shadow: 0 10px 32px rgba(28,45,42,.07); }
-.source-image-card img { width: 100%; height: 416px; border-radius: 7px; background: linear-gradient(135deg,#f2eee6,#fbfaf7); }
-.source-image-card figcaption { min-height: 0; align-content: center; padding: 18px 0; font-size: 28px; line-height: 1.35; }
-.source-image-card figcaption span:first-child { width: 44px; height: 44px; display: grid; place-items: center; background: #f7e8e3; border-radius: 50%; }
-.source-image-card:nth-child(even) img { grid-column: 2; grid-row: 1; }
-.source-image-card:nth-child(even) figcaption { grid-column: 1; grid-row: 1; }
 
 /* Interactive retrieval checks. Answers remain hidden until the learner checks a choice. */
 .method-checks { position: relative; isolation: isolate; margin: clamp(54px,8vw,96px) 0 46px; padding: clamp(24px,5vw,60px); overflow: hidden; color: #f8f5ef; background: radial-gradient(circle at 95% 4%,rgba(216,68,75,.25),transparent 27%), linear-gradient(135deg,#172729 0%,#20383a 58%,#182a2c 100%); border-radius: 16px; box-shadow: 0 20px 54px rgba(23,39,41,.14); }
@@ -656,16 +634,11 @@ body .site-shell .process-ribbon img { width: 65%; max-height: 351px; }
 .method-feedback p { margin: 0; color: #344542; font-size: 30px; line-height: 1.45; }
 
 @media (max-width: 900px) {
-  .source-image-card img { height: 351px; }
   .method-question-grid { grid-template-columns: 1fr; }
   .method-checks-heading { align-items: flex-start; flex-direction: column; }
 }
 
 @media (max-width: 640px) {
-  .source-image-card { display: flex; flex-direction: column; align-items: stretch; }
-  .source-image-card img { width: 65%; height: 273px; margin-inline: auto; }
-  .source-image-card:nth-child(even) img, .source-image-card:nth-child(even) figcaption { grid-column: auto; grid-row: auto; }
-  .source-image-card figcaption { min-height: 0; padding-top: 14px; }
   .method-checks { padding: 19px; border-radius: 11px; }
   .method-checks-heading h3 { font-size: 40px; }
   .method-check-score { width: 100%; border-radius: 8px; }
@@ -687,8 +660,6 @@ body .site-shell .process-ribbon img { width: 65%; max-height: 351px; }
 .hero-inner { min-height: min(620px,calc(100svh - 78px)); }
 .hero-visual { width: min(100%,510px); min-height: 440px; }
 .hero-dna-model img { object-fit: cover; }
-.source-image-card figcaption > span:last-child { display: block; }
-.source-image-card figcaption small { width: max-content; margin-bottom: 10px; padding: 5px 9px; display: block; color: var(--berry-deep); background: #f7e8e3; border-radius: 999px; font: 500 12px var(--mono); letter-spacing: .1em; }
 
 @media (max-width: 900px) {
   .hero-inner { min-height: auto; grid-template-columns: minmax(0,1fr) minmax(250px,.8fr); padding-top: 62px; padding-bottom: 76px; }
@@ -719,7 +690,6 @@ body .site-shell td, body .site-shell th { font-size: max(21px,1em); line-height
 .method-question-kicker { font-size: 18px; }
 .method-check-button { min-height: 58px; font-size: 20px; }
 .method-feedback strong { font-size: 24px; }
-.source-image-card figcaption { font-size: 24px; }
 
 /* Desktop: place all hero words in the photograph's uncluttered upper-left area. */
 .hero { color: var(--ink); background: var(--paper); }
@@ -785,5 +755,176 @@ body .site-shell .applications-intro > p:last-child { width: 100%; max-width: no
   .prep-inventory li, .step-reason p, .method-feedback p { font-size: 21px; }
   .method-question-card h4 { font-size: 24px; }
   .method-option { font-size: 18px; }
-  .source-image-card figcaption { font-size: 21px; }
+}
+
+
+/* Clearer teaching hierarchy, stronger safety labels, and larger learning controls. */
+.brand-name { font-size: 15px; }
+.brand-name small { font-size: 12px; letter-spacing: .07em; }
+.top-nav a, .header-cta { font-size: 16px; }
+.objectives .section-heading-row, .science-wrap .section-heading-row, .mechanisms .section-heading-row { align-items: center; }
+body .site-shell .objectives .section-heading-row .section-intro,
+body .site-shell .science-wrap .section-heading-row .section-intro,
+body .site-shell .mechanisms .section-heading-row .section-intro,
+body .site-shell .plenary-section .section-heading-row .section-intro { max-width: 480px; font-size: 23px; line-height: 1.45; }
+.science-tabs .science-tab { min-height: 78px; padding-inline: 24px; gap: 17px; font-size: 21px; }
+.science-tabs .science-tab > span { font-size: 14px; }
+.science-tabs .science-tab svg { width: 20px; height: 20px; }
+.mechanism-table thead th { font-size: 14px; }
+body .site-shell .mechanism-table tbody th,
+body .site-shell .mechanism-table tbody td { font-size: 21px; line-height: 1.5; }
+.mechanism-name { font-size: 22px; }
+.mechanism-footnote { padding: 20px 22px; background: #f3f0e8; border-radius: 10px; }
+body .site-shell .mechanism-footnote p { font-size: 23px; }
+
+.starter-headline { align-items: center; }
+.starter-headline h2 { font-size: clamp(54px,6.5vw,88px); }
+body .site-shell .starter-headline p { max-width: 480px; margin: 0; color: rgba(244,246,239,.9); font-size: 23px; line-height: 1.45; }
+.starter-trigger { min-height: 98px; }
+.starter-trigger b { font-size: 25px; }
+.starter-trigger small { color: rgba(245,243,237,.82); font: 17px/1.35 "DM Sans", sans-serif; }
+.starter-question h3 { font-size: clamp(30px,3.5vw,42px); }
+.starter-question p { color: rgba(245,243,237,.9); font-size: 20px; }
+.question-number { font-size: 16px; }
+.layer-option { min-height: 62px; font-size: 21px; }
+.answer-button { min-height: 56px; font-size: 18px; }
+body .site-shell .answer-text { max-width: 850px; font-size: 22px; line-height: 1.5; }
+.anatomy-reveal-intro { font-size: 19px; }
+.anatomy-layer-toggle > span:first-child { font-size: 21px; }
+.anatomy-layer-toggle > span:last-child { font-size: 14px; }
+body .site-shell .anatomy-layer-card p { font-size: 20px; line-height: 1.5; }
+.starter-figure img { width: 100%; max-height: none; }
+
+.safety-section .section-heading .eyebrow { color: var(--berry-deep); font-size: 16px; font-weight: 700; }
+body .site-shell .safety-section .section-heading-row .section-intro { max-width: 460px; font-size: 22px; }
+.risk-table thead th { font-size: 14px; }
+body .site-shell .risk-table tbody th,
+body .site-shell .risk-table tbody td { font-size: 21px; line-height: 1.5; }
+.risk-material { font-size: 23px; }
+.risk-material small { color: #53635c; font-size: 17px; line-height: 1.4; }
+.risk-pill { padding: 8px 12px; font: 700 16px/1.2 var(--mono); letter-spacing: .04em; }
+body .site-shell .risk-table td p { max-width: none; margin-top: 12px; font-size: 20px; line-height: 1.45; }
+.control-check { align-items: flex-start; white-space: normal; font: 700 17px/1.4 "DM Sans", sans-serif; }
+.safety-note { align-items: flex-start; font-size: 20px; line-height: 1.5; }
+
+.method-section .section-heading-row { align-items: flex-start; }
+.method-section .method-heading-copy { width: 100%; }
+.method-section .method-heading-copy .eyebrow { margin-bottom: 15px; font-size: 15px; }
+.method-section .method-heading-copy h2 { white-space: normal; font-size: clamp(42px,5.2vw,72px); }
+.method-section .method-heading-copy .section-intro { width: 100%; max-width: none; margin: 20px 0 0; font-size: 23px; line-height: 1.5; }
+.step-topline { align-items: center; }
+.step-label { color: #a42733; font-size: 19px; font-weight: 700; letter-spacing: .08em; }
+.step-time { font-size: 15px; }
+.step-card h3 { margin-top: 18px; font-size: clamp(32px,3.8vw,44px); }
+body .site-shell .step-instructions li p { font-size: 23px; line-height: 1.5; }
+.step-reason { margin-top: 24px; padding: 20px 22px; gap: 18px; border-radius: 0 10px 10px 0; }
+.step-reason > span { font-size: 18px; font-weight: 700; }
+body .site-shell .step-reason p { font-size: 23px; line-height: 1.5; }
+.step-observe { margin: 0 0 24px; padding: 20px 22px; background: #edf3e9; border-left: 4px solid #7d9a6b; border-radius: 0 10px 10px 0; }
+.step-observe > span { color: #3e6240; font: 700 18px/1.25 var(--mono); letter-spacing: .07em; }
+.step-observe p { margin: 9px 0 0; color: #34473b; font-size: 23px; line-height: 1.5; }
+.step-check { font-size: 21px; line-height: 1.5; }
+.step-check svg { width: 22px; height: 22px; }
+.prep-inventory h4 { font-size: 30px; }
+
+.plenary-section .section-heading-row { align-items: center; }
+body .site-shell .plenary-section .section-heading-row .section-intro { color: rgba(245,243,237,.88); }
+.who-question { max-width: 650px; font-size: clamp(22px,2.4vw,29px); }
+.answer-button-light:disabled { color: #cce0c7; background: rgba(130,170,117,.13); border-color: rgba(176,211,164,.5); cursor: default; }
+.who-answer { font-size: 23px; line-height: 1.5; }
+.troubleshoot-label { font-size: 17px; font-weight: 700; }
+.troubleshoot h3 { font-size: clamp(27px,3vw,38px); }
+body .site-shell .troubleshooting-answer p { max-width: none; font-size: 23px; line-height: 1.5; }
+.limits-note { align-items: flex-start; }
+body .site-shell .limits-note p { max-width: none; font-size: 22px; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .objectives .section-heading-row, .science-wrap .section-heading-row, .mechanisms .section-heading-row, .plenary-section .section-heading-row { align-items: flex-start; }
+  .starter-headline { align-items: flex-start; }
+  .method-section .method-heading-copy h2 { white-space: normal; }
+  .step-reason { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+@media (max-width: 640px) {
+  .brand-name { font-size: 15px; }
+  .brand-name small { font-size: 10px; }
+  .top-nav a { display: inline-flex; font-size: 14px; }
+  .top-nav a:first-child { display: inline-flex; }
+  .objectives .section-heading-row .section-intro,
+  .science-wrap .section-heading-row .section-intro,
+  .mechanisms .section-heading-row .section-intro,
+  .plenary-section .section-heading-row .section-intro { font-size: 20px; }
+  .science-tabs .science-tab { min-height: 64px; padding-inline: 8px; gap: 5px; font-size: 17px; }
+  .science-tabs .science-tab > span { font-size: 11px; }
+  .science-tabs .science-tab svg { width: 15px; height: 15px; }
+  body .site-shell .mechanism-table tbody th,
+  body .site-shell .mechanism-table tbody td { padding: 18px 12px; font-size: 19px; }
+  .starter-headline { margin: 38px 0 27px; }
+  body .site-shell .starter-headline p { font-size: 20px; }
+  .starter-trigger b { font-size: 22px; }
+  .starter-trigger small { font-size: 16px; }
+  .starter-question h3 { font-size: 29px; }
+  .starter-question p { font-size: 18px; }
+  .layer-option { min-height: 56px; font-size: 19px; }
+  body .site-shell .answer-text { font-size: 20px; }
+  .anatomy-layer-toggle > span:first-child { font-size: 20px; }
+  .anatomy-layer-toggle > span:last-child { font-size: 13px; }
+  body .site-shell .anatomy-layer-card p { font-size: 19px; }
+  .safety-section .section-heading .eyebrow { font-size: 14px; }
+  body .site-shell .risk-table tbody th,
+  body .site-shell .risk-table tbody td { padding: 18px 12px; font-size: 19px; }
+  .risk-material { font-size: 21px; }
+  .risk-material small { font-size: 16px; }
+  .risk-pill { font-size: 14px; }
+  body .site-shell .risk-table td p { font-size: 18px; }
+  .control-check { font-size: 16px; }
+  .safety-note { font-size: 18px; }
+  .method-section .method-heading-copy h2 { font-size: clamp(37px,10vw,52px); }
+  .method-section .method-heading-copy .section-intro { margin-top: 14px; font-size: 20px; }
+  .step-label { font-size: 16px; }
+  .step-time { font-size: 13px; }
+  .step-card h3 { font-size: 29px; }
+  body .site-shell .step-instructions li p { font-size: 20px; }
+  .step-reason { padding: 16px; }
+  .step-reason > span, .step-observe > span { font-size: 15px; }
+  body .site-shell .step-reason p, .step-observe p { font-size: 20px; }
+  .step-observe { padding: 16px; }
+  .step-check { font-size: 18px; }
+  .who-question { font-size: 22px; }
+  .who-answer { font-size: 20px; }
+  .troubleshoot-label { font-size: 15px; }
+  .troubleshoot h3 { font-size: 26px; }
+  body .site-shell .troubleshooting-answer p, body .site-shell .limits-note p { font-size: 20px; }
+}
+
+
+/* Ensure hazard category words and their supporting descriptions read at a glance. */
+.risk-pill { font-size: 18px; }
+.risk-material { font-size: 25px; }
+.risk-material small { font-size: 19px; }
+body .site-shell .risk-table td p { font-size: 21px; }
+.control-check { font-size: 18px; }
+@media (max-width: 640px) {
+  .risk-pill { font-size: 16px; }
+  .risk-material { font-size: 22px; }
+  .risk-material small { font-size: 17px; }
+  body .site-shell .risk-table td p { font-size: 19px; }
+  .control-check { font-size: 17px; }
+}
+
+
+/* Lift the labels the learner scans first, while keeping long-form copy unchanged. */
+.brand-name small { font-size: 14px; }
+.top-nav a, .header-cta { font-size: 18px; }
+.safety-section .section-heading .eyebrow { font-size: 18px; }
+.step-label { font-size: 21px; }
+.step-reason > span, .step-observe > span { font-size: 20px; }
+.troubleshoot-label { font-size: 20px; }
+@media (max-width: 640px) {
+  .brand-name small { font-size: 12px; }
+  .top-nav a { font-size: 16px; }
+  .safety-section .section-heading .eyebrow { font-size: 16px; }
+  .step-label { font-size: 18px; }
+  .step-reason > span, .step-observe > span { font-size: 18px; }
+  .troubleshoot-label { font-size: 18px; }
 }

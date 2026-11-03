@@ -28,6 +28,7 @@ const scienceTabs: Array<{
   image: string;
   alt: string;
   caption: string;
+  source?: "ppt" | "pdf";
 }> = [
   {
     id: "what",
@@ -35,9 +36,10 @@ const scienceTabs: Array<{
     kicker: "The target",
     title: "A thread you can see.",
     copy: "DNA is packaged inside the nucleus of each strawberry cell. Mash the fruit, disrupt its membranes, remove the pulp, then make the DNA leave the liquid as pale, stringy fibres. The material you collect is a crude extract—not purified DNA.",
-    image: "image-5-1.png",
-    alt: "Diagram of a plant cell showing its cell wall, cell membrane and nuclear envelope around the nucleus.",
-    caption: "Three boundaries stand between the fruit tissue and the DNA inside its nuclei.",
+    image: "pdf-dna-model-diagonal.jpg",
+    alt: "Colourful three-dimensional model of a DNA double helix, shown as two twisting molecular strands.",
+    caption: "DNA / A double-helix model of the molecule packaged inside the nucleus.",
+    source: "pdf",
   },
   {
     id: "why",
@@ -73,6 +75,7 @@ const steps = [
     ],
     reason: "Mashing breaks up the fruit tissue. The plant cell wall is a barrier; the detergent used later disrupts membranes, not the wall.",
     check: "The fruit is crushed and no longer whole, but the mixture is not frothy.",
+    lookFor: "The fruit should look evenly crushed with no large pieces. You should not see DNA fibres yet—the tissue is only being broken up.",
     image: "pdf-stage1-crushing.jpg",
     source: "pdf" as const,
     alt: "Sealable bag of crushed strawberries beside a bowl of fruit and a bottle labelled extraction buffer.",
@@ -88,6 +91,7 @@ const steps = [
     ],
     reason: "Detergent disrupts the cell membrane and nuclear envelope. Salt ions shield some of DNA’s negative charge so strands repel each other less.",
     check: "The salt has dissolved, and exactly 10 cm³ of buffer is added to the fruit.",
+    lookFor: "The buffer should look mixed, with no visible salt crystals. After it is added, the fruit mixture will be wet and red; no pale fibres are expected yet.",
     image: "image-9-1.png",
     source: "ppt" as const,
     alt: "Illustration of water, detergent and salt being combined into a lysis buffer.",
@@ -103,6 +107,7 @@ const steps = [
     ],
     reason: "The gauze retains much of the fruit pulp while the liquid filtrate—and dissolved cell contents—passes through.",
     check: "The tube holds liquid filtrate; most visible pulp is still in the gauze.",
+    lookFor: "Red or pink liquid passes into the tube while larger pieces of pulp remain in the gauze. DNA fibres are not expected to be visible yet.",
     image: "pdf-stage2-filtration.jpg",
     source: "pdf" as const,
     alt: "Gauze-lined funnel drains red strawberry mixture into a clear beaker while retaining pulp.",
@@ -119,6 +124,7 @@ const steps = [
     ],
     reason: "DNA dissolves poorly in cold ethanol. With salt present, it gathers into pale fibres at the boundary between the layers.",
     check: "The layers remain distinct. Keep ethanol cold, capped and away from flames; follow your teacher’s instructions.",
+    lookFor: "Look at the line where the upper ethanol layer meets the lower red filtrate. Pale, cloudy wisps or stringy fibres may collect there; do not stir the layers.",
     image: "pdf-stage3-ethanol.jpg",
     source: "pdf" as const,
     alt: "Test tube with red strawberry filtrate below a separate pale layer of cold ethanol.",
@@ -134,6 +140,7 @@ const steps = [
     ],
     reason: "The fibres are precipitated material from a crude extract; they are not proof of pure DNA by sight alone.",
     check: "The glass rod is intact, and your notes describe what you observed without claiming the sample is pure.",
+    lookFor: "Pale, slippery or stringy material should wind around the rod where it touches the liquid boundary. Record its colour, texture and location; appearance alone does not prove purity.",
     image: "pdf-stage4-spooling.jpg",
     source: "pdf" as const,
     alt: "A clean rod reaches into the tube at the liquid boundary to spool pale precipitated strands.",
@@ -163,46 +170,6 @@ const anatomyLayers = [
   { name: "Cell wall", detail: "A sturdy outer boundary around the plant cell. Detergent does not dissolve it; mashing helps break up the tissue and cell walls." },
   { name: "Cell membrane", detail: "A membrane around the cell contents. Detergent disrupts it, allowing contents to mix into the liquid." },
   { name: "Nuclear envelope", detail: "A membrane around the nucleus, where the DNA is packaged. Detergent disrupts this membrane too." },
-];
-
-const powerpointImages = [
-  { file: "BG1-image-1.jpeg", title: "Pale cloud slide background", alt: "Pale blue presentation background with soft white clouds at the right and lower edges." },
-  { file: "BG2-image-1.jpeg", title: "Alternate cloud slide background", alt: "Pale blue presentation background with soft white cloud shapes." },
-  { file: "image-1-1.jpg", title: "The strawberry specimen", alt: "Close-up photograph of a ripe red strawberry." },
-  { file: "image-3-1.png", title: "Chromosome sets", alt: "PowerPoint comparison of chromosome sets, highlighting the cultivated strawberry's octoploid eight-set condition." },
-  { file: "image-5-1.png", title: "Plant-cell layers", alt: "Plant-cell anatomy illustration showing the cell wall, cell membrane and nuclear envelope around the nucleus." },
-  { file: "image-7-1.png", title: "Laboratory workspace", alt: "Wide laboratory workspace photograph used as the source presentation's practical background." },
-  { file: "image-8-1.png", title: "Mashing the fruit", alt: "Three-stage picture showing a strawberry before, during and after mashing." },
-  { file: "image-9-1.png", title: "Lysis-buffer ingredients", alt: "Illustration of water, detergent and salt being combined for the extraction buffer." },
-  { file: "image-10-1.png", title: "Membrane disruption", alt: "Diagram illustrating detergent disrupting a cell membrane and releasing contents." },
-  { file: "image-11-1.png", title: "Salt shields charge", alt: "Diagram of salt ions near negatively charged DNA strands." },
-  { file: "image-12-1.png", title: "Filtering the pulp", alt: "Illustration of strawberry mixture passing through gauze in a funnel into a tube." },
-  { file: "image-13-1.png", title: "Two liquid layers", alt: "Tube illustration with ethanol over filtrate and pale fibres appearing at the boundary." },
-  { file: "image-14-1.png", title: "DNA strands gather", alt: "Diagram comparing separated DNA strands with strands gathered together." },
-  { file: "image-15-1.png", title: "Spooling the fibres", alt: "Illustration of a glass rod winding pale fibres from a tube." },
-  { file: "image-16-1.png", title: "Extraction overview", alt: "Wide workflow illustration summarizing the strawberry DNA extraction stages." },
-  { file: "image-17-1.jpg", title: "Original practical title image", alt: "PowerPoint cover image reading Strawberry DNA Extraction above a large strawberry illustration." },
-  { file: "image-18-1.png", title: "What else is in the extract?", alt: "Tube diagram showing that a crude extract can contain DNA, RNA, proteins and cell-wall material." },
-  { file: "image-19-1.jpg", title: "DNA-analysis instrument", alt: "Laboratory analysis instrument pictured in the PowerPoint's DNA applications slide." },
-  { file: "image-19-2.png", title: "DNA-analysis readout", alt: "Illustrated analysis readout shown in the PowerPoint's applications slide." },
-  { file: "image-22-1.png", title: "Question prompt bubble", alt: "Large empty speech bubble used as a question-prompt graphic in the source slides." },
-  { file: "image-22-2.png", title: "Extraction concept map", alt: "Source-slide sequence connecting water and detergent, strawberry mashing, filtering and DNA collection." },
-  { file: "image-23-1.png", title: "Question prompt bubble variation", alt: "Large empty speech bubble repeated as a prompt graphic on a later source slide." },
-];
-
-const pdfPictures = [
-  { file: "pdf-header-lab.jpg", title: "The strawberry extraction bench", alt: "Wide laboratory scene with strawberries, a beaker of crushed fruit, a test tube and glassware across the bench." },
-  { file: "pdf-stage1-crushing.jpg", title: "PDF stage 1 — crush the fruit", alt: "Sealable bag of crushed strawberries beside a bowl of fruit and a bottle labelled extraction buffer." },
-  { file: "pdf-stage2-filtration.jpg", title: "PDF stage 2 — filter the pulp", alt: "Gauze-lined funnel drains red strawberry mixture into a clear beaker while retaining pulp." },
-  { file: "pdf-stage3-ethanol.jpg", title: "PDF stage 3 — layer cold ethanol", alt: "Test tube with red strawberry filtrate below a separate pale layer of cold ethanol." },
-  { file: "pdf-stage4-spooling.jpg", title: "PDF stage 4 — spool the strands", alt: "A clean rod reaches into the tube at the liquid boundary to spool pale precipitated strands." },
-  { file: "pdf-dna-model-upright.jpg", title: "DNA molecular model — upright", alt: "Colourful three-dimensional molecular model of a DNA double helix standing upright against a blue laboratory-style background." },
-  { file: "pdf-dna-model-diagonal.jpg", title: "DNA molecular model — diagonal", alt: "Colourful three-dimensional molecular model of a DNA double helix angled diagonally against a blue background." },
-];
-
-const allSourceImages = [
-  ...powerpointImages.map((image) => ({ ...image, base: media, source: "POWERPOINT" })),
-  ...pdfPictures.map((image) => ({ ...image, base: pdfMedia, source: "PDF" })),
 ];
 
 const methodQuestions = [
@@ -308,10 +275,8 @@ export default function Home() {
   const correctMethodCount = methodQuestions.filter((question) =>
     checkedMethodQuestions.includes(question.id) && methodSelections[question.id] === question.correctIndex,
   ).length;
-  const toggleWhoAmI = (index: number) => {
-    setRevealedCards((current) =>
-      current.includes(index) ? current.filter((item) => item !== index) : [...current, index],
-    );
+  const revealWhoAmI = (index: number) => {
+    setRevealedCards((current) => current.includes(index) ? current : [...current, index]);
   };
   const toggleAnatomyLayer = (index: number) => {
     setRevealedLayers((current) =>
@@ -422,7 +387,7 @@ export default function Home() {
                 {activeTab === "why" && <div className="octoploid-callout"><strong>8<span>n</span></strong><span><b>OCTOPLOID</b><small>8 sets of chromosomes<br />in each cell</small></span><p>More chromosome sets can mean more DNA per cell—one reason strawberry DNA is easier to see in this classroom extraction.</p></div>}
                 {activeTab === "how" && <div className="science-mini-note"><Sparkles size={16} /><span><b>Key idea</b> The white material is a crude extract, not pure DNA.</span></div>}
               </div>
-              <Figure image={selectedScience.image} alt={selectedScience.alt} caption={selectedScience.caption} className="science-figure" />
+              <Figure image={selectedScience.image} source={selectedScience.source} alt={selectedScience.alt} caption={selectedScience.caption} className="science-figure" />
             </div>
           </div>
         </section>
@@ -512,8 +477,7 @@ export default function Home() {
         <section className="method-section" id="method" aria-labelledby="method-title">
           <div className="section-wrap">
             <div className="section-heading section-heading-row reveal">
-              <div><p className="eyebrow"><span>06</span> / THE PRACTICAL</p><h2 id="method-title">Five moves to <em>visible DNA.</em></h2></div>
-              <p className="section-intro">Start with the kit checklist, then follow each numbered mini-step in order. Keep the filtrate and ethanol layers separate.</p>
+              <div className="method-heading-copy"><p className="eyebrow"><span>06</span> / THE PRACTICAL</p><h2 id="method-title">Five moves to <em>visible DNA.</em></h2><p className="section-intro">Start with the kit checklist, then follow each numbered mini-step in order. Keep the filtrate and ethanol layers separate. Look for pale, stringy fibres only after cold ethanol meets the filtrate.</p></div>
             </div>
             <section className="materials-prep reveal" aria-labelledby="prep-title">
               <div className="materials-prep-heading"><p className="eyebrow"><span>BEFORE STEP 01</span> / SET UP</p><h3 id="prep-title">Get every material ready first.</h3><p>Prepare the buffer before it touches the fruit. Measure slowly and keep the work area clear.</p></div>
@@ -539,6 +503,7 @@ export default function Home() {
                       {step.instructions.map((instruction, index) => <li key={instruction}><span>{String(index + 1).padStart(2, "0")}</span><p>{instruction}</p></li>)}
                     </ol>
                     <div className="step-reason"><span>WHY IT MATTERS</span><p>{step.reason}</p></div>
+                    <div className="step-observe"><span>WHAT TO LOOK FOR</span><p>{step.lookFor}</p></div>
                     <Figure image={step.image} source={step.source} alt={step.alt} caption={`STEP ${step.number} / ${step.label.toUpperCase()}`} className="step-figure" />
                     <div className="step-check"><Check size={16} /><span><b>Bench check</b> {step.check}</span></div>
                   </article>
@@ -590,10 +555,10 @@ export default function Home() {
             <div className="who-grid">
               {whoAmI.map((card, index) => {
                 const isRevealed = revealedCards.includes(index);
-                return <article className={`who-card reveal ${isRevealed ? "is-revealed" : ""}`} key={card.answer}>
+                return <article className={`who-card reveal ${isRevealed ? "is-visible is-revealed" : ""}`} key={card.answer}>
                   <div className="who-card-top"><span>CLUE 0{index + 1}</span><span className="who-orbit"><Dna size={18} /></span></div>
                   <p className="who-question">“{card.clue}”</p>
-                  <button className="answer-button answer-button-light" type="button" aria-expanded={isRevealed} onClick={() => toggleWhoAmI(index)}>{isRevealed ? "Hide answer" : "Reveal answer"}<ChevronDown size={15} /></button>
+                  <button className="answer-button answer-button-light" type="button" aria-expanded={isRevealed} disabled={isRevealed} onClick={() => revealWhoAmI(index)}>{isRevealed ? "Answer revealed" : "Reveal answer"}{!isRevealed && <ChevronDown size={15} />}</button>
                   {isRevealed && <p className="who-answer" role="status"><Check size={16} /> {card.answer}</p>}
                 </article>;
               })}
@@ -612,18 +577,6 @@ export default function Home() {
             </div>
             <div className="limits-note reveal"><span className="limits-icon"><Sparkles size={18} /></span><p><b>Keep the claim careful.</b> The white material is a crude extract and may contain RNA, proteins and cell-wall material. Enzymes can break DNA down; cold slows this process. Seeing fibres does not show that the sample is pure DNA.</p></div>
             <Figure image="image-18-1.png" alt="Tube illustration labelling DNA, RNA, proteins and cell-wall debris in a crude strawberry extract." caption="LIMITS / A visible extract can contain DNA alongside other cell material." className="limits-figure reveal" />
-          </div>
-        </section>
-        <section className="source-archive section-wrap" id="source-archive" aria-labelledby="archive-title">
-          <div className="section-heading section-heading-row reveal">
-            <div><p className="eyebrow"><span>08</span> / SOURCE PICTURES</p><h2 id="archive-title">Every picture<br />from both <em>sources.</em></h2></div>
-            <p className="section-intro">Browse all 29 pictures: 22 from the PowerPoint and seven from the PDF. The PDF's first picture leads the page; its four practical images also appear beside the matching method steps.</p>
-          </div>
-          <div className="source-image-grid">
-            {allSourceImages.map((image, index) => <figure className="source-image-card reveal" key={image.file}>
-              <img src={`${image.base}${image.file}`} alt={image.alt} loading="lazy" />
-              <figcaption><span>{String(index + 1).padStart(2, "0")}</span><span><small>{image.source}</small>{image.title}</span></figcaption>
-            </figure>)}
           </div>
         </section>
       </main>
