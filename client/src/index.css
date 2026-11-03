@@ -701,3 +701,89 @@ body .site-shell .process-ribbon img { width: 65%; max-height: 351px; }
   .hero-inner { min-height: auto; padding: 42px 22px 72px; grid-template-columns: 1fr; row-gap: 18px; }
   .hero-visual { width: 100%; min-height: 320px; justify-self: center; }
 }
+
+
+/* Compact, readable type scale and editorial row spans requested in the latest revision. */
+body { font-size: 22px; }
+body .site-shell p:not(.eyebrow) { font-size: max(23px,1em); line-height: 1.45; }
+body .site-shell td, body .site-shell th { font-size: max(21px,1em); line-height: 1.45; }
+.section-heading h2, .starter-headline h2, .plenary-section h2 { font-size: clamp(40px,5.2vw,72px); }
+.objective-card h3, .final-quiz-heading h3, .troubleshoot h3, .step-card h3, .starter-question h3 { font-size: 28px; }
+.science-panel-copy h3 { font-size: clamp(29px,3.6vw,42px); }
+.application-copy h4, .materials-prep h4 { font-size: 27px; }
+.image-plate figcaption { font-size: 20px; }
+.prep-inventory li, .step-reason p, .method-feedback p { font-size: 24px; }
+.method-question-card h4 { font-size: 27px; }
+.method-option { min-height: 64px; font-size: 20px; }
+.method-option > span { width: 32px; height: 32px; font-size: 20px; }
+.method-question-kicker { font-size: 18px; }
+.method-check-button { min-height: 58px; font-size: 20px; }
+.method-feedback strong { font-size: 24px; }
+.source-image-card figcaption { font-size: 24px; }
+
+/* Desktop: place all hero words in the photograph's uncluttered upper-left area. */
+.hero { color: var(--ink); background: var(--paper); }
+.hero-photo-banner { isolation: isolate; }
+.hero-photo-banner img { position: relative; z-index: -1; }
+.hero-overlay-copy { position: absolute; z-index: 2; top: clamp(18px,4.2%,34px); left: clamp(20px,5vw,72px); width: min(470px,42%); max-width: 470px; margin: 0; padding: clamp(14px,1.6vw,21px); color: var(--ink); background: rgba(251,250,247,.93); border: 1px solid rgba(30,45,46,.12); border-left: 4px solid var(--berry); border-radius: 8px; box-shadow: 0 12px 36px rgba(22,38,38,.16); backdrop-filter: blur(8px); }
+.hero-overlay-copy .eyebrow { margin-bottom: 8px; color: #56645f; font-size: 9px; }
+.hero-overlay-copy .eyebrow-dot { flex: none; }
+.hero-overlay-copy h1 { max-width: 430px; margin: 0; color: #203332; font-size: clamp(34px,3.2vw,46px); letter-spacing: -.065em; line-height: .96; }
+.hero-overlay-copy h1 em { color: var(--berry-deep); }
+body .site-shell .hero-overlay-copy .hero-deck { max-width: 420px; margin: 9px 0 12px; color: #4e5e59; font-size: clamp(15px,1.2vw,17px); line-height: 1.42; }
+.hero-overlay-copy .hero-actions { gap: 8px; }
+.hero-overlay-copy .button { min-height: 38px; padding-inline: 11px; gap: 7px; font-size: 11px; }
+.hero-overlay-copy .button-ghost { color: #334340; background: rgba(255,255,255,.45); border-color: rgba(35,53,50,.22); }
+.hero-overlay-copy .hero-meta { margin-top: 10px; gap: 11px 15px; color: #52625c; font-size: 9px; }
+.hero-overlay-copy .hero-meta svg { width: 13px; height: 13px; }
+.hero-photo-banner figcaption { position: relative; z-index: 1; min-height: 42px; padding-block: 9px; font-size: 14px; }
+.hero-photo-banner figcaption span:first-child { font-size: 10px; }
+.hero-photo-banner figcaption span:last-child { font-size: 15px; }
+
+/* Keep both long practical titles together with their descriptions on wide screens. */
+.method-section .section-heading-row, .safety-section .section-heading-row { align-items: center; }
+.method-section .section-heading-row > div, .safety-section .section-heading-row > div { flex: 0 1 auto; }
+.method-section .section-heading-row .section-intro, .safety-section .section-heading-row .section-intro { max-width: 390px; }
+.method-section .section-heading h2 { font-size: clamp(38px,4.2vw,60px); }
+.safety-section .section-heading h2 { font-size: clamp(38px,4vw,58px); }
+@media (min-width: 1101px) {
+  .method-section .section-heading h2, .safety-section .section-heading h2 { white-space: nowrap; }
+}
+
+/* Let the important explanatory notes use the entire available blog column. */
+.mechanism-footnote { align-items: flex-start; }
+.mechanism-footnote p { flex: 1; width: 100%; max-width: none; }
+.science-panel-copy { width: 100%; max-width: none; }
+body .site-shell .science-panel-copy > p:not(.eyebrow) { width: 100%; max-width: none; }
+.applications-intro { width: 100%; max-width: none; display: grid; grid-template-columns: minmax(0,1fr); gap: 0; }
+.applications-intro h3 { max-width: none; margin: 0 0 9px; font-size: clamp(28px,3.3vw,40px); }
+body .site-shell .applications-intro > p:last-child { width: 100%; max-width: none; margin: 0 0 22px; }
+
+@media (max-width: 1200px) {
+  .hero-overlay-copy { position: relative; top: auto; left: auto; width: 100%; max-width: none; margin: 0; border-radius: 0; box-shadow: none; backdrop-filter: none; }
+  .hero-overlay-copy h1 { max-width: 620px; }
+  body .site-shell .hero-overlay-copy .hero-deck { max-width: 720px; }
+}
+
+@media (max-width: 900px) {
+  .method-section .section-heading-row, .safety-section .section-heading-row { align-items: flex-start; }
+  .method-section .section-heading h2, .safety-section .section-heading h2 { white-space: normal; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 20px; }
+  body .site-shell p:not(.eyebrow) { font-size: max(20px,1em); }
+  body .site-shell td, body .site-shell th { font-size: max(19px,1em); }
+  .section-heading h2, .starter-headline h2, .plenary-section h2 { font-size: clamp(36px,10vw,54px); }
+  .hero-overlay-copy { padding: 19px 20px; }
+  .hero-overlay-copy h1 { font-size: clamp(34px,9vw,44px); }
+  .hero-overlay-copy .hero-actions { align-items: stretch; }
+  .hero-overlay-copy .button { min-height: 42px; }
+  .hero-overlay-copy .hero-meta { margin-top: 12px; }
+  .method-section .section-heading h2, .safety-section .section-heading h2 { font-size: clamp(36px,9vw,50px); }
+  .applications-intro h3 { font-size: 28px; }
+  .prep-inventory li, .step-reason p, .method-feedback p { font-size: 21px; }
+  .method-question-card h4 { font-size: 24px; }
+  .method-option { font-size: 18px; }
+  .source-image-card figcaption { font-size: 21px; }
+}

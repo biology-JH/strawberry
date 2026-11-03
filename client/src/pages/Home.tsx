@@ -360,10 +360,7 @@ export default function Home() {
         <section className="hero" id="top" aria-labelledby="hero-title">
           <figure className="hero-photo-banner">
             <img src={`${pdfMedia}pdf-header-lab.jpg`} alt="Wide laboratory bench with strawberries, a beaker of crushed fruit, a test tube and glassware." fetchPriority="high" />
-            <figcaption><span>THE ORIGINAL PRACTICAL / PDF PAGE 01</span><span>Strawberry DNA extraction, set up on the bench</span></figcaption>
-          </figure>
-          <div className="hero-inner">
-            <div className="hero-copy">
+            <div className="hero-copy hero-overlay-copy">
               <p className="eyebrow eyebrow-light"><span className="eyebrow-dot" /> FIELD GUIDE 01 <span className="eyebrow-divider">/</span> DNA EXTRACTION</p>
               <h1 id="hero-title">A berry full<br />of <em>instructions.</em></h1>
               <p className="hero-deck">Unlock the code inside a strawberry. Follow the science from crushed fruit to visible, pale DNA fibres.</p>
@@ -376,17 +373,8 @@ export default function Home() {
                 <span><ShieldCheck size={16} /> Teacher-supervised</span>
               </div>
             </div>
-            <div className="hero-visual">
-              <div className="hero-orbit orbit-one" />
-              <div className="hero-orbit orbit-two" />
-              <figure className="hero-berry hero-dna-model">
-                <img src={`${pdfMedia}pdf-dna-model-diagonal.jpg`} alt="Colourful three-dimensional molecular model of a DNA double helix angled diagonally against a blue background." />
-                <figcaption><span>THE MOLECULE</span><span>DNA / DOUBLE HELIX</span></figcaption>
-              </figure>
-              <div className="hero-stamp"><strong>8<span>n</span></strong><span>OCTO-<br />PLOID</span></div>
-            </div>
-            <div className="hero-bottomline"><span>LAB NOTE 001</span><span>FROM FRUIT TISSUE TO VISIBLE DNA</span><span>SCROLL TO EXPLORE <ArrowDown size={13} /></span></div>
-          </div>
+            <figcaption><span>LAB NOTE 001 / STRAWBERRY DNA EXTRACTION</span><span>OCTOPLOID / 8n</span></figcaption>
+          </figure>
         </section>
 
         <section className="objectives section-wrap" aria-labelledby="objectives-title">
@@ -504,7 +492,7 @@ export default function Home() {
 
         <section className="safety-section section-wrap" id="safety" aria-labelledby="safety-title">
           <div className="section-heading section-heading-row reveal">
-            <div><p className="eyebrow"><span>05</span> / SAFETY CHECK</p><h2 id="safety-title">Good science<br />starts <em>carefully.</em></h2></div>
+            <div><p className="eyebrow"><span>05</span> / SAFETY CHECK</p><h2 id="safety-title">Good science starts <em>carefully.</em></h2></div>
             <p className="section-intro">Read the control before handling each material. Follow your teacher’s local instructions.</p>
           </div>
           <div className="risk-table-wrap reveal" role="region" aria-label="Risk assessment and controls" tabIndex={0}>
@@ -524,7 +512,7 @@ export default function Home() {
         <section className="method-section" id="method" aria-labelledby="method-title">
           <div className="section-wrap">
             <div className="section-heading section-heading-row reveal">
-              <div><p className="eyebrow"><span>06</span> / THE PRACTICAL</p><h2 id="method-title">Five moves<br />to <em>visible DNA.</em></h2></div>
+              <div><p className="eyebrow"><span>06</span> / THE PRACTICAL</p><h2 id="method-title">Five moves to <em>visible DNA.</em></h2></div>
               <p className="section-intro">Start with the kit checklist, then follow each numbered mini-step in order. Keep the filtrate and ethanol layers separate.</p>
             </div>
             <section className="materials-prep reveal" aria-labelledby="prep-title">
