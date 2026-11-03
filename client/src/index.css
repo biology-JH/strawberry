@@ -675,3 +675,29 @@ body .site-shell .process-ribbon img { width: 65%; max-height: 351px; }
   .method-option { grid-template-columns: 34px minmax(0,1fr); gap: 8px; padding: 11px; }
   .method-option > span { width: 32px; height: 32px; }
 }
+
+
+/* Full-bleed, uncropped header photograph from page one of the supplied PDF. */
+.hero::before, .hero::after { display: none; }
+.hero-photo-banner { position: relative; width: 100%; margin: 0; overflow: hidden; background: #dbe3e2; }
+.hero-photo-banner img { display: block; width: 100%; max-width: none; height: auto; object-fit: contain; }
+.hero-photo-banner figcaption { min-height: 54px; padding: 13px clamp(22px,5vw,74px); display: flex; align-items: center; justify-content: space-between; gap: 14px; color: #425452; background: linear-gradient(90deg,#f5f1e8,#e8efec); border-bottom: 1px solid rgba(30,45,46,.12); }
+.hero-photo-banner figcaption span:first-child { color: var(--berry-deep); font: 500 11px var(--mono); letter-spacing: .11em; }
+.hero-photo-banner figcaption span:last-child { font: 16px var(--serif); }
+.hero-inner { min-height: min(620px,calc(100svh - 78px)); }
+.hero-visual { width: min(100%,510px); min-height: 440px; }
+.hero-dna-model img { object-fit: cover; }
+.source-image-card figcaption > span:last-child { display: block; }
+.source-image-card figcaption small { width: max-content; margin-bottom: 10px; padding: 5px 9px; display: block; color: var(--berry-deep); background: #f7e8e3; border-radius: 999px; font: 500 12px var(--mono); letter-spacing: .1em; }
+
+@media (max-width: 900px) {
+  .hero-inner { min-height: auto; grid-template-columns: minmax(0,1fr) minmax(250px,.8fr); padding-top: 62px; padding-bottom: 76px; }
+  .hero-visual { min-height: 370px; }
+}
+
+@media (max-width: 640px) {
+  .hero-photo-banner figcaption { min-height: 0; align-items: flex-start; flex-direction: column; gap: 5px; padding: 11px 18px; }
+  .hero-photo-banner figcaption span:last-child { font-size: 15px; }
+  .hero-inner { min-height: auto; padding: 42px 22px 72px; grid-template-columns: 1fr; row-gap: 18px; }
+  .hero-visual { width: 100%; min-height: 320px; justify-self: center; }
+}

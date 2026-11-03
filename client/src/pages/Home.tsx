@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 const media = "/images/pptx/";
+const pdfMedia = "/images/pdf/";
 
 type ScienceTab = "what" | "why" | "how";
 
@@ -72,8 +73,9 @@ const steps = [
     ],
     reason: "Mashing breaks up the fruit tissue. The plant cell wall is a barrier; the detergent used later disrupts membranes, not the wall.",
     check: "The fruit is crushed and no longer whole, but the mixture is not frothy.",
-    image: "image-8-1.png",
-    alt: "Three-stage illustration showing a whole strawberry, gentle mashing and crushed fruit.",
+    image: "pdf-stage1-crushing.jpg",
+    source: "pdf" as const,
+    alt: "Sealable bag of crushed strawberries beside a bowl of fruit and a bottle labelled extraction buffer.",
   },
   {
     number: "02",
@@ -87,6 +89,7 @@ const steps = [
     reason: "Detergent disrupts the cell membrane and nuclear envelope. Salt ions shield some of DNA’s negative charge so strands repel each other less.",
     check: "The salt has dissolved, and exactly 10 cm³ of buffer is added to the fruit.",
     image: "image-9-1.png",
+    source: "ppt" as const,
     alt: "Illustration of water, detergent and salt being combined into a lysis buffer.",
   },
   {
@@ -100,8 +103,9 @@ const steps = [
     ],
     reason: "The gauze retains much of the fruit pulp while the liquid filtrate—and dissolved cell contents—passes through.",
     check: "The tube holds liquid filtrate; most visible pulp is still in the gauze.",
-    image: "image-12-1.png",
-    alt: "A hand pours strawberry mixture through gauze in a funnel while the filtrate collects in a tube.",
+    image: "pdf-stage2-filtration.jpg",
+    source: "pdf" as const,
+    alt: "Gauze-lined funnel drains red strawberry mixture into a clear beaker while retaining pulp.",
   },
   {
     number: "04",
@@ -115,8 +119,9 @@ const steps = [
     ],
     reason: "DNA dissolves poorly in cold ethanol. With salt present, it gathers into pale fibres at the boundary between the layers.",
     check: "The layers remain distinct. Keep ethanol cold, capped and away from flames; follow your teacher’s instructions.",
-    image: "image-13-1.png",
-    alt: "Layered tube showing ice-cold ethanol above strawberry filtrate with pale DNA fibres at the boundary.",
+    image: "pdf-stage3-ethanol.jpg",
+    source: "pdf" as const,
+    alt: "Test tube with red strawberry filtrate below a separate pale layer of cold ethanol.",
   },
   {
     number: "05",
@@ -129,8 +134,9 @@ const steps = [
     ],
     reason: "The fibres are precipitated material from a crude extract; they are not proof of pure DNA by sight alone.",
     check: "The glass rod is intact, and your notes describe what you observed without claiming the sample is pure.",
-    image: "image-15-1.png",
-    alt: "Tube and glass rod illustration showing pale precipitated DNA fibres being collected.",
+    image: "pdf-stage4-spooling.jpg",
+    source: "pdf" as const,
+    alt: "A clean rod reaches into the tube at the liquid boundary to spool pale precipitated strands.",
   },
 ];
 
@@ -182,6 +188,21 @@ const powerpointImages = [
   { file: "image-22-1.png", title: "Question prompt bubble", alt: "Large empty speech bubble used as a question-prompt graphic in the source slides." },
   { file: "image-22-2.png", title: "Extraction concept map", alt: "Source-slide sequence connecting water and detergent, strawberry mashing, filtering and DNA collection." },
   { file: "image-23-1.png", title: "Question prompt bubble variation", alt: "Large empty speech bubble repeated as a prompt graphic on a later source slide." },
+];
+
+const pdfPictures = [
+  { file: "pdf-header-lab.jpg", title: "The strawberry extraction bench", alt: "Wide laboratory scene with strawberries, a beaker of crushed fruit, a test tube and glassware across the bench." },
+  { file: "pdf-stage1-crushing.jpg", title: "PDF stage 1 — crush the fruit", alt: "Sealable bag of crushed strawberries beside a bowl of fruit and a bottle labelled extraction buffer." },
+  { file: "pdf-stage2-filtration.jpg", title: "PDF stage 2 — filter the pulp", alt: "Gauze-lined funnel drains red strawberry mixture into a clear beaker while retaining pulp." },
+  { file: "pdf-stage3-ethanol.jpg", title: "PDF stage 3 — layer cold ethanol", alt: "Test tube with red strawberry filtrate below a separate pale layer of cold ethanol." },
+  { file: "pdf-stage4-spooling.jpg", title: "PDF stage 4 — spool the strands", alt: "A clean rod reaches into the tube at the liquid boundary to spool pale precipitated strands." },
+  { file: "pdf-dna-model-upright.jpg", title: "DNA molecular model — upright", alt: "Colourful three-dimensional molecular model of a DNA double helix standing upright against a blue laboratory-style background." },
+  { file: "pdf-dna-model-diagonal.jpg", title: "DNA molecular model — diagonal", alt: "Colourful three-dimensional molecular model of a DNA double helix angled diagonally against a blue background." },
+];
+
+const allSourceImages = [
+  ...powerpointImages.map((image) => ({ ...image, base: media, source: "POWERPOINT" })),
+  ...pdfPictures.map((image) => ({ ...image, base: pdfMedia, source: "PDF" })),
 ];
 
 const methodQuestions = [
@@ -251,15 +272,18 @@ function Figure({
   alt,
   caption,
   className = "",
+  source = "ppt",
 }: {
   image: string;
   alt: string;
   caption: string;
   className?: string;
+  source?: "ppt" | "pdf";
 }) {
+  const imageBase = source === "pdf" ? pdfMedia : media;
   return (
     <figure className={`image-plate ${className}`}>
-      <img src={`${media}${image}`} alt={alt} loading="lazy" />
+      <img src={`${imageBase}${image}`} alt={alt} loading="lazy" />
       <figcaption>{caption}</figcaption>
     </figure>
   );
@@ -334,6 +358,10 @@ export default function Home() {
 
       <main id="main-content">
         <section className="hero" id="top" aria-labelledby="hero-title">
+          <figure className="hero-photo-banner">
+            <img src={`${pdfMedia}pdf-header-lab.jpg`} alt="Wide laboratory bench with strawberries, a beaker of crushed fruit, a test tube and glassware." fetchPriority="high" />
+            <figcaption><span>THE ORIGINAL PRACTICAL / PDF PAGE 01</span><span>Strawberry DNA extraction, set up on the bench</span></figcaption>
+          </figure>
           <div className="hero-inner">
             <div className="hero-copy">
               <p className="eyebrow eyebrow-light"><span className="eyebrow-dot" /> FIELD GUIDE 01 <span className="eyebrow-divider">/</span> DNA EXTRACTION</p>
@@ -348,12 +376,12 @@ export default function Home() {
                 <span><ShieldCheck size={16} /> Teacher-supervised</span>
               </div>
             </div>
-            <div className="hero-visual" aria-label="A strawberry from the source presentation">
+            <div className="hero-visual">
               <div className="hero-orbit orbit-one" />
               <div className="hero-orbit orbit-two" />
-              <figure className="hero-berry">
-                <img src={`${media}image-1-1.jpg`} alt="A ripe strawberry, the fruit used in this DNA extraction practical." />
-                <figcaption><span>THE SPECIMEN</span><span>Fragaria × ananassa</span></figcaption>
+              <figure className="hero-berry hero-dna-model">
+                <img src={`${pdfMedia}pdf-dna-model-diagonal.jpg`} alt="Colourful three-dimensional molecular model of a DNA double helix angled diagonally against a blue background." />
+                <figcaption><span>THE MOLECULE</span><span>DNA / DOUBLE HELIX</span></figcaption>
               </figure>
               <div className="hero-stamp"><strong>8<span>n</span></strong><span>OCTO-<br />PLOID</span></div>
             </div>
@@ -513,7 +541,7 @@ export default function Home() {
               <div className="video-foot"><span>POWERPOINT VIDEO LINK / YOUTUBE</span><a href="https://www.youtube.com/watch?v=W1DVEtzrl9g" target="_blank" rel="noreferrer">Open the video on YouTube <ArrowUpRight size={16} /></a></div>
             </section>
             <ol className="timeline-list">
-              {steps.map((step) => (
+            {steps.map((step) => (
                 <li className="timeline-step reveal" key={step.number}>
                   <div className="timeline-rail"><span>{step.number}</span><i /></div>
                   <article className="step-card">
@@ -523,7 +551,7 @@ export default function Home() {
                       {step.instructions.map((instruction, index) => <li key={instruction}><span>{String(index + 1).padStart(2, "0")}</span><p>{instruction}</p></li>)}
                     </ol>
                     <div className="step-reason"><span>WHY IT MATTERS</span><p>{step.reason}</p></div>
-                    <Figure image={step.image} alt={step.alt} caption={`STEP ${step.number} / ${step.label.toUpperCase()}`} className="step-figure" />
+                    <Figure image={step.image} source={step.source} alt={step.alt} caption={`STEP ${step.number} / ${step.label.toUpperCase()}`} className="step-figure" />
                     <div className="step-check"><Check size={16} /><span><b>Bench check</b> {step.check}</span></div>
                   </article>
                 </li>
@@ -600,13 +628,13 @@ export default function Home() {
         </section>
         <section className="source-archive section-wrap" id="source-archive" aria-labelledby="archive-title">
           <div className="section-heading section-heading-row reveal">
-            <div><p className="eyebrow"><span>08</span> / SOURCE PICTURES</p><h2 id="archive-title">Every picture<br />from the <em>PowerPoint.</em></h2></div>
-            <p className="section-intro">Browse all 22 images extracted from the supplied slide deck. Key diagrams also appear beside the science and method they explain.</p>
+            <div><p className="eyebrow"><span>08</span> / SOURCE PICTURES</p><h2 id="archive-title">Every picture<br />from both <em>sources.</em></h2></div>
+            <p className="section-intro">Browse all 29 pictures: 22 from the PowerPoint and seven from the PDF. The PDF's first picture leads the page; its four practical images also appear beside the matching method steps.</p>
           </div>
           <div className="source-image-grid">
-            {powerpointImages.map((image, index) => <figure className="source-image-card reveal" key={image.file}>
-              <img src={`${media}${image.file}`} alt={image.alt} loading="lazy" />
-              <figcaption><span>{String(index + 1).padStart(2, "0")}</span><span>{image.title}</span></figcaption>
+            {allSourceImages.map((image, index) => <figure className="source-image-card reveal" key={image.file}>
+              <img src={`${image.base}${image.file}`} alt={image.alt} loading="lazy" />
+              <figcaption><span>{String(index + 1).padStart(2, "0")}</span><span><small>{image.source}</small>{image.title}</span></figcaption>
             </figure>)}
           </div>
         </section>
