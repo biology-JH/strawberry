@@ -352,7 +352,13 @@ export default function Home() {
             <article className="objective-card reveal"><span className="objective-number">02</span><span className="objective-icon"><FlaskConical size={20} /></span><h3>Explain the reagents</h3><p>Connect detergent, salt and cold ethanol to the job each does in the extraction.</p><span className="objective-tag">EXPLAIN</span></article>
             <article className="objective-card reveal"><span className="objective-number">03</span><span className="objective-icon"><ShieldCheck size={20} /></span><h3>Work safely</h3><p>Follow the method carefully, identify hazards and assess what the result can—and cannot—show.</p><span className="objective-tag">EVALUATE</span></article>
           </div>
-          <div className="vocabulary-strip reveal"><span className="vocab-label">WORDS TO KNOW</span><span><b>Lysis</b> breaking open cells</span><span><b>Filtration</b> separating pulp from liquid</span><span><b>Precipitation</b> DNA leaving solution as a solid</span><span><b>Spooling</b> winding fibres around a rod</span></div>
+          <div className="vocabulary-strip reveal">
+            <span className="vocab-label">WORDS TO KNOW</span>
+            <span><b>Lysis <span className="term-translation" lang="zh-Hant">（細胞裂解）</span></b> breaking open cells</span>
+            <span><b>Filtration <span className="term-translation" lang="zh-Hant">（過濾）</span></b> separating pulp from liquid</span>
+            <span><b>Precipitation <span className="term-translation" lang="zh-Hant">（沉澱）</span></b> DNA leaving solution as a solid</span>
+            <span><b>Spooling <span className="term-translation" lang="zh-Hant">（纏繞收集）</span></b> winding fibres around a rod</span>
+          </div>
         </section>
 
         <section className="science-section" id="science" aria-labelledby="science-title">
@@ -564,9 +570,16 @@ export default function Home() {
             <div className="final-quiz reveal">
               <div className="final-quiz-heading"><span className="quiz-symbol"><CircleHelp size={21} /></span><div><p className="eyebrow eyebrow-light">LAST CHECK / 01</p><h3>Why does cold ethanol make DNA visible?</h3></div></div>
               <div className="quiz-options" role="group" aria-label="Choose why cold ethanol makes DNA visible">
-                {["DNA stays dissolved in cold ethanol.", "Ethanol digests the cell wall.", "Ethanol turns histones into crystals.", "Cold ethanol makes DNA precipitate."].map((answer, index) => <button className={`quiz-option ${quizChoice === answer ? "selected" : ""} ${quizSubmitted && answer === "Cold ethanol makes DNA precipitate." ? "correct" : ""}`} key={answer} type="button" aria-pressed={quizChoice === answer} onClick={() => { setQuizChoice(answer); setQuizSubmitted(false); }}><span>{String(index + 1).padStart(2, "0")}</span>{answer}{quizSubmitted && answer === "Cold ethanol makes DNA precipitate." && <Check size={16} />}</button>)}
+                {["DNA stays dissolved in cold ethanol.", "Ethanol digests the cell wall.", "Ethanol turns histones into crystals.", "Cold ethanol makes DNA precipitate."].map((answer, index) => (
+                  <button className={`quiz-option ${quizChoice === answer ? "selected" : ""} ${quizSubmitted && answer === "Cold ethanol makes DNA precipitate." ? "correct" : ""}`} key={answer} type="button" aria-pressed={quizChoice === answer} onClick={() => { setQuizChoice(answer); setQuizSubmitted(false); }}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>{answer}{quizSubmitted && answer === "Cold ethanol makes DNA precipitate." && <Check size={16} />}
+                  </button>
+                ))}
               </div>
-              <div className="quiz-submit-row"><button className="button button-primary" type="button" disabled={!quizChoice} onClick={() => setQuizSubmitted(true)}>Check my answer <ArrowRight size={16} /></button>{quizSubmitted && <p className={`quiz-feedback ${quizChoice === "Cold ethanol makes DNA precipitate." ? "is-correct" : "is-incorrect"}`} role="status" aria-live="polite">{quizChoice === "Cold ethanol makes DNA precipitate." ? "Correct. DNA is poorly soluble in cold ethanol and forms a precipitate." : "Not quite. Think about what happens to DNA’s solubility in cold ethanol."}</p>}</div>
+              <div className="quiz-submit-row">
+                <button className="button button-primary" type="button" disabled={!quizChoice} onClick={() => setQuizSubmitted(true)}>Check my answer <ArrowRight size={16} /></button>
+                {quizSubmitted && <p className={`quiz-feedback ${quizChoice === "Cold ethanol makes DNA precipitate." ? "is-correct" : "is-incorrect"}`} role="status" aria-live="polite"><strong>{quizChoice === "Cold ethanol makes DNA precipitate." ? "Correct." : "Not quite — the answer is:"}</strong> With salt present, DNA is poorly soluble in cold ethanol, so it leaves the solution as a precipitate. Pale fibres collect at the boundary between the ethanol and filtrate layers.</p>}
+              </div>
             </div>
             <div className="troubleshoot reveal">
               <div><span className="troubleshoot-label">TROUBLESHOOTING</span><h3>No white fibres appeared. What might have gone wrong?</h3></div>
