@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { ArrowRight, Check, CircleHelp, RotateCcw } from "lucide-react";
 
+type RubricConcept = {
+  label: string;
+  alternatives: string[][];
+};
+
 type MultipleChoiceCheckpointProps = {
   id: string;
   kicker: string;
@@ -50,7 +55,7 @@ export function MultipleChoiceCheckpoint({
       </button>
       <div className={`checkpoint-feedback ${checked ? (isCorrect ? "is-correct" : "needs-review") : ""}`} id={feedbackId} role="status" aria-live="polite" hidden={!checked}>
         {checked && <>
-          <strong>{isCorrect ? "Correct." : "Not quite—review the explanation."}</strong>
+          <strong>{isCorrect ? "Score 1/1 · Correct." : "Score 0/1 · Not quite—review the explanation."}</strong>
           <p><b>Best answer:</b> {options[correctIndex]}</p>
           <p>{explanation}</p>
         </>}
@@ -66,7 +71,19 @@ type ShortAnswerCheckpointProps = {
   placeholder: string;
   modelAnswer: string;
   selfCheckPrompt?: string;
+  rubric: RubricConcept[];
 };
+
+function normalizeForRubric(value: string) {
+  return value.toLowerCase().replace(/⁺/g, "+").replace(/[^a-z0-9+]+/g, " ").trim().replace(/\s+/g, " ");
+}
+
+function matchesRubricConcept(response: string, concept: RubricConcept) {
+  const normalizedResponse = normalizeForRubric(response);
+  return concept.alternatives.some((alternative) =>
+    alternative.every((term) => normalizedResponse.includes(normalizeForRubric(term))),
+  );
+}
 
 export function ShortAnswerCheckpoint({
   id,
@@ -75,17 +92,32 @@ export function ShortAnswerCheckpoint({
   placeholder,
   modelAnswer,
   selfCheckPrompt = "Compare your response with the model answer. Which key idea did you include?",
+  rubric,
 }: ShortAnswerCheckpointProps) {
   const [response, setResponse] = useState("");
+  const [checked, setChecked] = useState(false);
   const [modelRevealed, setModelRevealed] = useState(false);
   const responseId = `${id}-response`;
+  const feedbackId = `${id}-score-feedback`;
   const answerId = `${id}-model-answer`;
+  const matchedConcepts = rubric.filter((concept) => matchesRubricConcept(response, concept));
+  const missingConcepts = rubric.filter((concept) => !matchesRubricConcept(response, concept));
 
   return (
-    <article className="checkpoint-card short-answer-card">
+    <article className={`checkpoint-card short-answer-card ${checked ? (missingConcepts.length === 0 ? "is-correct" : "needs-review") : ""}`}>
       <div className="checkpoint-kicker"><span>{kicker}</span><CircleHelp size={17} aria-hidden="true" /></div>
       <label className="checkpoint-prompt" htmlFor={responseId}>{prompt}</label>
-      <textarea id={responseId} value={response} onChange={(event) => setResponse(event.target.value)} placeholder={placeholder} rows={3} />
+      <textarea id={responseId} value={response} onChange={(event) => { setResponse(event.target.value); setChecked(false); }} placeholder={placeholder} rows={3} />
+      <button className="checkpoint-action" type="button" disabled={!response.trim()} aria-expanded={checked} aria-controls={feedbackId} onClick={() => setChecked(true)}>
+        {checked ? `Auto-score · ${matchedConcepts.length}/${rubric.length} key ideas` : "Check answer"}<ArrowRight size={17} aria-hidden="true" />
+      </button>
+      <div className={`checkpoint-feedback ${checked ? (missingConcepts.length === 0 ? "is-correct" : "needs-review") : ""}`} id={feedbackId} role="status" aria-live="polite" hidden={!checked}>
+        {checked && <>
+          <strong>Auto-score: {matchedConcepts.length}/{rubric.length} key ideas identified.</strong>
+          <p>{missingConcepts.length === 0 ? "All key ideas were detected. Compare with the model answer for nuance." : <>Ideas to revisit: {missingConcepts.map((concept) => concept.label).join("; ")}.</>}</p>
+          <p className="self-check-prompt">This keyword check is a guide, not a final mark; different accurate wording may not match. Compare with the model answer.</p>
+        </>}
+      </div>
       <button className="checkpoint-action" type="button" disabled={!response.trim() || modelRevealed} aria-expanded={modelRevealed} aria-controls={answerId} onClick={() => setModelRevealed(true)}>
         {modelRevealed ? "Model answer shown" : "Reveal model answer"}{modelRevealed ? <Check size={17} aria-hidden="true" /> : <ArrowRight size={17} aria-hidden="true" />}
       </button>
@@ -150,7 +182,7 @@ export function FiltrationSortCheckpoint() {
       </button>
       <div className="checkpoint-feedback model-answer" id={feedbackId} role="status" aria-live="polite" hidden={!checked}>
         {checked && <>
-          <strong>{correctCount === filtrationItems.length ? "All sorted correctly." : "Check the corrections above."}</strong>
+          <strong>Score: {correctCount}/{filtrationItems.length} · {correctCount === filtrationItems.length ? "All sorted correctly." : "Check the corrections above."}</strong>
           <p>The filter retains coarse pulp and debris; soluble material—including DNA and some soluble proteins—can pass through. Filtration does not purify DNA by itself.</p>
           <p className="self-check-prompt"><RotateCcw size={15} aria-hidden="true" /> Change any selection to try the sort again.</p>
         </>}

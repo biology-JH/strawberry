@@ -271,8 +271,8 @@ function PracticalStepCard({ step }: { step: PracticalStepData }) {
         </ol>
         <div className="step-reason"><span>WHY IT MATTERS</span><p>{step.reason}</p></div>
         <div className="step-observe"><span>WHAT TO LOOK FOR</span><p>{step.lookFor}</p></div>
-        <Figure image={step.image} source={step.source} alt={step.alt} caption={`STEP ${step.number} / ${step.label.toUpperCase()}`} className="step-figure" />
-        <div className="step-check"><Check size={16} /><span><b>Bench check</b> {step.check}</span></div>
+        <Figure image={step.image} source={step.source} alt={step.alt} caption={`STEP ${step.number} / ${step.label.toUpperCase()}`} className={`step-figure step-figure-${step.number}`} />
+        <div className="step-check"><Check size={16} /><span><b>Bench check:</b> {step.check}</span></div>
       </article>
     </li>
   );
@@ -402,13 +402,12 @@ export default function Home() {
                   correctIndex={1}
                   explanation="Eight chromosome sets mean more genome copies than in a diploid strawberry cell, and ripe fruit is easy to mash. The number of chromosome sets is not a direct measure of total DNA mass across species: genome size matters too."
                 />
-                <p className="pair-share-note">First choose an answer on your own. After checking it, compare your reasoning with a partner: which part is about ploidy, and which part is about the practical specimen?</p>
               </section>
               <div className="starter-question"><span className="question-number">Q1</span><div><h3>Which layer does detergent <em>not</em> break?</h3><p>Tap your prediction. Then reveal the explanation.</p></div></div>
               <div className="layer-options" role="group" aria-label="Choose the cell layer detergent does not break">
-                {["Cell wall", "Cell membrane", "Nuclear envelope"].map((layer) => <button className={`layer-option ${starterLayer === layer ? "selected" : ""}`} key={layer} type="button" aria-pressed={starterLayer === layer} onClick={() => { setStarterLayer(layer); setStarterRevealed(false); }}>{layer}<span>{starterLayer === layer && <Check size={15} />}</span></button>)}
+                {["Cell wall", "Cell membrane", "Nuclear envelope"].map((layer) => <button className={`layer-option ${starterLayer === layer ? "selected" : ""}`} key={layer} type="button" disabled={starterRevealed} aria-pressed={starterLayer === layer} onClick={() => setStarterLayer(layer)}>{layer}<span>{starterLayer === layer && <Check size={15} />}</span></button>)}
               </div>
-              <div className="answer-row"><button className="answer-button" type="button" aria-expanded={starterRevealed} onClick={() => setStarterRevealed((visible) => !visible)}>{starterRevealed ? "Hide answer" : "Reveal answer"}<ChevronDown size={15} /></button>{starterRevealed && <p className="answer-text" role="status"><b>The cell wall.</b> Detergent disrupts the cell membrane and nuclear envelope. Mashing helps break up the strawberry tissue and cell walls.</p>}</div>
+              <div className="answer-row"><button className="answer-button" type="button" disabled={!starterLayer || starterRevealed} aria-expanded={starterRevealed} aria-controls="starter-answer" onClick={() => setStarterRevealed(true)}>{starterRevealed ? "Answer checked" : "Check & reveal answer"}<ChevronDown size={15} /></button><p className="answer-text" id="starter-answer" role="status" hidden={!starterRevealed}><b>{starterLayer === "Cell wall" ? "Score 1/1 — correct." : "Score 0/1 — not quite."}</b> The cell wall is the layer detergent does not break. Detergent disrupts the cell membrane and nuclear envelope; mashing helps break up strawberry tissue and cell walls.</p></div>
               <Figure image="image-5-1.png" alt="Large labelled plant cell diagram showing the cell wall, plasma membrane and nuclear envelope." caption="CELL ANATOMY / Follow the boundaries from the outside of the cell to the nucleus." className="starter-figure" />
               <div className="anatomy-reveal">
                 <p className="anatomy-reveal-intro">Tap each layer to reveal what it does.</p>
@@ -442,13 +441,13 @@ export default function Home() {
           <div className="vocabulary-section reveal" aria-labelledby="vocab-title">
             <div className="glossary-heading"><p className="vocab-label" id="vocab-title">WORDS TO KNOW</p><p>Seven useful terms—English, Traditional Chinese, and what each means in this practical.</p></div>
             <div className="vocabulary-grid">
-              <article className="vocab-card"><h3>Lysis <span className="term-translation" lang="zh-Hant">（細胞裂解）</span></h3><p>Releasing cell contents by disrupting membranes. Detergent disrupts the cell membrane and nuclear envelope; mashing helps break up tissue and cell walls.</p></article>
-              <article className="vocab-card"><h3>Filtration <span className="term-translation" lang="zh-Hant">（過濾）</span></h3><p>Separating coarse pulp, cell-wall fragments and debris from liquid. Soluble DNA and other dissolved materials can pass into the filtrate; it is not purified DNA.</p></article>
-              <article className="vocab-card"><h3>Precipitation <span className="term-translation" lang="zh-Hant">（沉澱）</span></h3><p>DNA leaves the liquid as a visible solid when salt and alcohol change the solution conditions. Pale fibres collect at the boundary; the extract may contain other materials.</p></article>
-              <article className="vocab-card"><h3>Spooling <span className="term-translation" lang="zh-Hant">（纏繞收集）</span></h3><p>Winding aggregated, visible DNA-rich fibres around a clean glass rod—or a paperclip if the teacher permits—to collect them from the liquid boundary.</p></article>
-              <article className="vocab-card"><h3>Octoploid <span className="term-translation" lang="zh-Hant">（八倍體）</span></h3><p>Having eight chromosome sets. Cultivated garden strawberry is octoploid (2n = 8x = 56); the number of sets alone does not compare total DNA mass between species.</p></article>
-              <article className="vocab-card"><h3>Phospholipid Bilayer <span className="term-translation" lang="zh-Hant">（磷脂雙分子層）</span></h3><p>A double layer of phospholipid molecules forming cell and nuclear membranes. Amphipathic detergent molecules disrupt these membranes; they do not dissolve the plant cell wall.</p></article>
-              <article className="vocab-card"><h3>Solubility <span className="term-translation" lang="zh-Hant">（溶解度）</span></h3><p>The ability of a substance to dissolve in a solvent. DNA dissolves in water, but becomes much less soluble in cold alcohol when salt is present, so it can precipitate.</p></article>
+              <article className="vocab-card"><h3>Lysis <span className="term-translation" lang="zh-Hant">（細胞裂解）</span></h3><p>Breaking open cells and nuclei by disrupting their lipid membranes; mashing helps break up the fruit tissue.</p></article>
+              <article className="vocab-card"><h3>Filtration <span className="term-translation" lang="zh-Hant">（過濾）</span></h3><p>Passing the mixture through porous gauze retains bulk pulp while dissolved DNA and other soluble contents pass into the filtrate.</p></article>
+              <article className="vocab-card"><h3>Precipitation <span className="term-translation" lang="zh-Hant">（沉澱）</span></h3><p>With salt present, cold alcohol lowers DNA’s solubility so it gathers as visible, DNA-rich fibres.</p></article>
+              <article className="vocab-card"><h3>Spooling <span className="term-translation" lang="zh-Hant">（纏繞收集）</span></h3><p>Winding aggregated DNA-rich fibres around a rod to collect them from the crude extract.</p></article>
+              <article className="vocab-card"><h3>Octoploid <span className="term-translation" lang="zh-Hant">（八倍體）</span></h3><p>Having eight chromosome sets (2n = 8x = 56 in garden strawberry). Ploidy alone does not predict visible DNA yield.</p></article>
+              <article className="vocab-card"><h3>Phospholipid Bilayer <span className="term-translation" lang="zh-Hant">（磷脂雙分子層）</span></h3><p>The two-layered lipid structure of cell and nuclear membranes. Detergent disrupts it; mashing—not detergent—helps break up the plant cell wall.</p></article>
+              <article className="vocab-card"><h3>Solubility <span className="term-translation" lang="zh-Hant">（溶解度）</span></h3><p>How readily a substance dissolves. DNA dissolves in water but is much less soluble in cold alcohol when salt is present.</p></article>
             </div>
           </div>
         </section>
@@ -561,7 +560,18 @@ export default function Home() {
                     "The soap creates osmotic pressure that forces water into the cell until it bursts.",
                   ]} correctIndex={1} explanation="A soap molecule is amphipathic: one part associates with water and another with membrane lipids. Detergent disrupts the cell membrane and nuclear envelope. It does not dissolve the plant cell wall."
                   />
-                  <ShortAnswerCheckpoint id="session-1-salt" kicker="Q2 · SHORT-ANSWER CHALLENGE" prompt="Why is table salt (NaCl) added to the lysis buffer? How do Na⁺ ions interact with the electrical charge of DNA?" placeholder="Write one or two sentences about the DNA backbone and strand repulsion…" modelAnswer="DNA’s phosphate backbone carries negative charges. Sodium ions partly shield these charges, reducing repulsion between DNA strands. When cold ethanol is added later, this charge screening helps the DNA molecules aggregate and precipitate. Salt does not make DNA positively charged." />
+                  <ShortAnswerCheckpoint
+                    id="session-1-salt"
+                    kicker="Q2 · SHORT-ANSWER CHALLENGE"
+                    prompt="Why is table salt (NaCl) added to the lysis buffer? How do Na⁺ ions interact with the electrical charge of DNA?"
+                    placeholder="Write one or two sentences about the DNA backbone and strand repulsion…"
+                    modelAnswer="DNA’s phosphate backbone carries negative charges. Sodium ions partly shield these charges, reducing repulsion between DNA strands. When cold ethanol is added later, this charge screening helps the DNA molecules aggregate and precipitate. Salt does not make DNA positively charged."
+                    rubric={[
+                      { label: "salt / sodium ions", alternatives: [["salt"], ["sodium"], ["na+"]] },
+                      { label: "negative charges on DNA or its phosphate backbone", alternatives: [["negative", "phosphate"], ["negative charge", "dna"], ["negatively charged"]] },
+                      { label: "charge shielding or reduced strand repulsion", alternatives: [["shield"], ["screen"], ["repulsion"], ["repel"]] },
+                    ]}
+                  />
                 </div></div>
               </section>
 
@@ -570,7 +580,19 @@ export default function Home() {
                 <ol className="timeline-list" start={3}>{steps.slice(2, 3).map((step) => <PracticalStepCard step={step} key={step.number} />)}</ol>
                 <div className="checkpoint-session"><div className="checkpoint-session-heading"><span>AFTER SESSION 02</span><h4>Sort the mixture, then predict a filter failure.</h4></div><div className="checkpoint-session-grid checkpoint-session-grid-stack">
                   <FiltrationSortCheckpoint />
-                  <ShortAnswerCheckpoint id="session-2-filter-breach" kicker="Q2 · CRITICAL THINKING" prompt="If a student squeezes the filter hard enough to tear it, how could this affect later observations of the precipitate under a microscope?" placeholder="Explain what extra material could enter the filtrate and why it matters…" modelAnswer="A tear can let coarse pulp and cell-wall fragments enter the filtrate. Large debris and proteins attached to it may contaminate the precipitate, making pale fibres harder to distinguish from cell fragments under a microscope. The extract is already crude, and a coffee filter cannot prove DNA purity; soluble proteins may pass through even when the filter is intact." selfCheckPrompt="Did you mention both cell debris and how contamination makes the result harder to interpret?" />
+                  <ShortAnswerCheckpoint
+                    id="session-2-filter-breach"
+                    kicker="Q2 · CRITICAL THINKING"
+                    prompt="If a student squeezes the filter hard enough to tear it, how could this affect later observations of the precipitate under a microscope?"
+                    placeholder="Explain what extra material could enter the filtrate and why it matters…"
+                    modelAnswer="A tear can let coarse pulp and cell-wall fragments enter the filtrate. Large debris and proteins attached to it may contaminate the precipitate, making pale fibres harder to distinguish from cell fragments under a microscope. The extract is already crude, and a coffee filter cannot prove DNA purity; soluble proteins may pass through even when the filter is intact."
+                    selfCheckPrompt="Did you mention both cell debris and how contamination makes the result harder to interpret?"
+                    rubric={[
+                      { label: "pulp, debris, cell-wall fragments or tissue can pass through", alternatives: [["pulp"], ["debris"], ["cell wall"], ["fragments"], ["tissue"]] },
+                      { label: "contamination by debris or proteins", alternatives: [["contamin"], ["protein"], ["impur"], ["cell material"]] },
+                      { label: "the fibres become harder to see, distinguish or interpret", alternatives: [["harder", "see"], ["harder", "distinguish"], ["obscur"], ["interpret"], ["microscope"], ["confus"]] },
+                    ]}
+                  />
                 </div></div>
               </section>
 
@@ -595,7 +617,7 @@ export default function Home() {
             </div>
             <section className="method-checks reveal" aria-labelledby="method-check-title">
               <div className="method-checks-heading">
-                <div><p className="eyebrow eyebrow-light"><span>PAUSE &amp; PREDICT</span> / RETRIEVAL CHECK</p><h3 id="method-check-title">Think it through.<br /><em>Then check.</em></h3><p>Choose one answer for each question. The answer and explanation stay hidden until you select “Check answer”.</p></div>
+                <div><p className="eyebrow eyebrow-light"><span>PAUSE &amp; PREDICT</span> / RETRIEVAL CHECK</p><h3 id="method-check-title">Think it through.<br /><em>Then check.</em></h3><p>Choose one answer for each question, then submit it to see your score, the best answer and an explanation.</p></div>
                 <p className="method-check-score" aria-live="polite">{checkedMethodCount} / {methodQuestions.length} checked<br /><strong>{correctMethodCount} correct</strong></p>
               </div>
               <div className="method-question-grid">
@@ -669,7 +691,7 @@ export default function Home() {
               </div>
               <div className="quiz-submit-row">
                 <button className="button button-primary" type="button" disabled={!quizChoice} onClick={() => setQuizSubmitted(true)}>Check my answer <ArrowRight size={16} /></button>
-                {quizSubmitted && <p className={`quiz-feedback ${quizChoice === "With salt present, cold ethanol reduces DNA solubility so it aggregates as pale fibres." ? "is-correct" : "is-incorrect"}`} role="status" aria-live="polite"><strong>{quizChoice === "With salt present, cold ethanol reduces DNA solubility so it aggregates as pale fibres." ? "Correct." : "Not quite — the answer is:"}</strong> Ethanol is a poorer solvent for DNA than water. With salt ions screening some phosphate-charge repulsion, DNA aggregates and precipitates; pale DNA-rich fibres collect at the ethanol–filtrate boundary.</p>}
+                {quizSubmitted && <p className={`quiz-feedback ${quizChoice === "With salt present, cold ethanol reduces DNA solubility so it aggregates as pale fibres." ? "is-correct" : "is-incorrect"}`} role="status" aria-live="polite"><strong>{quizChoice === "With salt present, cold ethanol reduces DNA solubility so it aggregates as pale fibres." ? "Score 1/1 · Correct." : "Score 0/1 · Not quite — the answer is:"}</strong> Ethanol is a poorer solvent for DNA than water. With salt ions screening some phosphate-charge repulsion, DNA aggregates and precipitates; pale DNA-rich fibres collect at the ethanol–filtrate boundary.</p>}
               </div>
             </div>
             <div className="troubleshoot reveal">
