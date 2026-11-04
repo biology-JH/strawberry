@@ -13,6 +13,7 @@ import {
   Sparkles,
   Timer,
 } from "lucide-react";
+import { FiltrationSortCheckpoint, MultipleChoiceCheckpoint, ShortAnswerCheckpoint } from "../components/LessonCheckpoint";
 
 const media = "/images/pptx/";
 const pdfMedia = "/images/pdf/";
@@ -46,7 +47,7 @@ const scienceTabs: Array<{
     label: "Why",
     kicker: "The strawberry advantage",
     title: "Eight sets. One visible result.",
-    copy: "The cultivated strawberry used for this practical is octoploid: its cells have eight sets of chromosomes (8n). That can mean more DNA per cell than in a diploid organism, helping the precipitated material become easier to see. Ripe fruit is also soft and easy to mash.",
+    copy: "Cultivated garden strawberry is octoploid (2n = 8x = 56): each cell has eight chromosome sets. That is more sets than a diploid strawberry cell, but ploidy alone does not prove more total DNA mass than a human cell—genome size also matters. Soft, ripe fruit is easy to mash and supplies many cells for the classroom extract.",
     image: "image-3-1.png",
     alt: "PowerPoint illustration comparing two chromosome sets with eight chromosome sets.",
     caption: "Octoploid means eight chromosome sets in each cell (8n).",
@@ -256,6 +257,27 @@ function Figure({
   );
 }
 
+type PracticalStepData = typeof steps[number];
+
+function PracticalStepCard({ step }: { step: PracticalStepData }) {
+  return (
+    <li className="timeline-step reveal">
+      <div className="timeline-rail"><span>{step.number}</span><i /></div>
+      <article className="step-card">
+        <div className="step-topline"><span className="step-label">{step.label}</span><span className="step-time">STEP {step.number}</span></div>
+        <h3>{step.title}</h3>
+        <ol className="step-instructions" aria-label={`Detailed instructions: ${step.label}`}>
+          {step.instructions.map((instruction, index) => <li key={instruction}><span>{String(index + 1).padStart(2, "0")}</span><p>{instruction}</p></li>)}
+        </ol>
+        <div className="step-reason"><span>WHY IT MATTERS</span><p>{step.reason}</p></div>
+        <div className="step-observe"><span>WHAT TO LOOK FOR</span><p>{step.lookFor}</p></div>
+        <Figure image={step.image} source={step.source} alt={step.alt} caption={`STEP ${step.number} / ${step.label.toUpperCase()}`} className="step-figure" />
+        <div className="step-check"><Check size={16} /><span><b>Bench check</b> {step.check}</span></div>
+      </article>
+    </li>
+  );
+}
+
 export default function Home() {
   useScrollReveal();
   const [activeTab, setActiveTab] = useState<ScienceTab>("what");
@@ -306,8 +328,24 @@ export default function Home() {
   };
 
   return (
-    <div className="site-shell">
+    <div className="site-shell site-frame">
       <a className="skip-link" href="#main-content">Skip to the practical guide</a>
+      <aside className="lesson-sidebar" aria-label="Lesson navigation">
+        <a className="sidebar-brand" href="#top" aria-label="Back to the Strawberry DNA field guide"><span className="sidebar-mark"><Leaf size={20} /></span><span><small>SCIENCE FIELD GUIDE</small><strong>Strawberry<br />DNA</strong></span></a>
+        <p className="sidebar-nav-label">ON THIS PAGE</p>
+        <nav className="sidebar-nav" aria-label="Jump to lesson section">
+          <a href="#starter"><span>01</span> Starter</a>
+          <a href="#objectives"><span>02</span> Goals &amp; glossary</a>
+          <a href="#science"><span>03</span> What · Why · How</a>
+          <a href="#mechanisms"><span>04</span> Chemistry</a>
+          <a href="#safety"><span>05</span> Safety</a>
+          <a href="#method"><span>06</span> Practical method</a>
+          <a href="#applications"><span>07</span> DNA in use</a>
+          <a href="#plenary"><span>08</span> Plenary</a>
+        </nav>
+        <div className="sidebar-footnote"><span className="eyebrow-dot" /><span>Teacher-supervised<br />classroom practical</span></div>
+      </aside>
+      <div className="site-main">
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Strawberry DNA field guide home">
           <span className="brand-mark"><Leaf size={18} strokeWidth={2.2} /></span>
@@ -328,7 +366,7 @@ export default function Home() {
             <div className="hero-copy hero-overlay-copy">
               <p className="eyebrow eyebrow-light"><span className="eyebrow-dot" /> FIELD GUIDE 01 <span className="eyebrow-divider">/</span> DNA EXTRACTION</p>
               <h1 id="hero-title">A berry full<br />of <em>instructions.</em></h1>
-              <p className="hero-deck">Unlock the code inside a strawberry. Follow the science from crushed fruit to visible, pale DNA fibres.</p>
+              <p className="hero-deck">From crushed fruit to pale DNA fibres, follow the science—not just the recipe.</p>
               <div className="hero-actions">
                 <a className="button button-primary" href="#science">Explore the science <ArrowRight size={16} /></a>
                 <a className="button button-ghost" href="#method">Jump to the method <ArrowDown size={15} /></a>
@@ -342,100 +380,30 @@ export default function Home() {
           </figure>
         </section>
 
-        <section className="objectives section-wrap" aria-labelledby="objectives-title">
-          <div className="section-heading section-heading-row reveal">
-            <div><p className="eyebrow"><span>01</span> / YOUR FIELD BRIEF</p><h2 id="objectives-title">Three goals.<br /><em>One tiny cell.</em></h2></div>
-            <p className="section-intro">By the end, you’ll be able to explain what each step does—not just follow a recipe.</p>
-          </div>
-          <div className="objective-grid">
-            <article className="objective-card reveal"><span className="objective-number">01</span><span className="objective-icon"><Dna size={20} /></span><h3>Make DNA visible</h3><p>Extract pale, stringy material from strawberry cells and describe what you observe.</p><span className="objective-tag">OBSERVE</span></article>
-            <article className="objective-card reveal"><span className="objective-number">02</span><span className="objective-icon"><FlaskConical size={20} /></span><h3>Explain the reagents</h3><p>Connect detergent, salt and cold ethanol to the job each does in the extraction.</p><span className="objective-tag">EXPLAIN</span></article>
-            <article className="objective-card reveal"><span className="objective-number">03</span><span className="objective-icon"><ShieldCheck size={20} /></span><h3>Work safely</h3><p>Follow the method carefully, identify hazards and assess what the result can—and cannot—show.</p><span className="objective-tag">EVALUATE</span></article>
-          </div>
-          <div className="vocabulary-strip reveal">
-            <span className="vocab-label">WORDS TO KNOW</span>
-            <span><b>Lysis <span className="term-translation" lang="zh-Hant">（細胞裂解）</span></b> breaking open cells</span>
-            <span><b>Filtration <span className="term-translation" lang="zh-Hant">（過濾）</span></b> separating pulp from liquid</span>
-            <span><b>Precipitation <span className="term-translation" lang="zh-Hant">（沉澱）</span></b> DNA leaving solution as a solid</span>
-            <span><b>Spooling <span className="term-translation" lang="zh-Hant">（纏繞收集）</span></b> winding fibres around a rod</span>
-          </div>
-        </section>
-
-        <section className="science-section" id="science" aria-labelledby="science-title">
-          <div className="section-wrap science-wrap">
-            <div className="section-heading section-heading-row reveal">
-              <div><p className="eyebrow"><span>02</span> / THE SCIENCE</p><h2 id="science-title">Know the <em>why.</em></h2></div>
-              <p className="section-intro">Tap through the story of the extraction. Every stage has a job.</p>
-            </div>
-            <div className="science-tabs" role="tablist" aria-label="Explore the science">
-              {scienceTabs.map((tab, index) => (
-                <button
-                  className={`science-tab ${activeTab === tab.id ? "is-active" : ""}`}
-                  id={`science-tab-${tab.id}`}
-                  key={tab.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeTab === tab.id}
-                  aria-controls="science-panel"
-                  tabIndex={activeTab === tab.id ? 0 : -1}
-                  onClick={() => setActiveTab(tab.id)}
-                  onKeyDown={(event) => handleTabKeyDown(event, index)}
-                >
-                  <span>0{index + 1}</span>{tab.label}<ArrowUpRight size={16} />
-                </button>
-              ))}
-            </div>
-            <div className="science-panel reveal" id="science-panel" role="tabpanel" aria-labelledby={`science-tab-${activeTab}`} tabIndex={0}>
-              <div className="science-panel-copy">
-                <p className="eyebrow">{selectedScience.kicker}</p>
-                <h3>{selectedScience.title}</h3>
-                <p>{selectedScience.copy}</p>
-                {activeTab === "why" && <div className="octoploid-callout"><strong>8<span>n</span></strong><span><b>OCTOPLOID</b><small>8 sets of chromosomes<br />in each cell</small></span><p>More chromosome sets can mean more DNA per cell—one reason strawberry DNA is easier to see in this classroom extraction.</p></div>}
-                {activeTab === "how" && <div className="science-mini-note"><Sparkles size={16} /><span><b>Key idea</b> The white material is a crude extract, not pure DNA.</span></div>}
-              </div>
-              <Figure image={selectedScience.image} source={selectedScience.source} alt={selectedScience.alt} caption={selectedScience.caption} className="science-figure" />
-            </div>
-          </div>
-        </section>
-
-        <section className="mechanisms section-wrap" aria-labelledby="mechanism-title">
-          <div className="section-heading section-heading-row reveal">
-            <div className="mechanisms-heading-copy"><p className="eyebrow"><span>03</span> / REAGENT LOGIC</p><h2 id="mechanism-title">The chemistry<br />behind the <em>fibres.</em></h2><p className="section-intro">Three mechanisms help move DNA from a cell into a visible, collectable form.</p></div>
-          </div>
-          <div className="mechanism-table-wrap reveal" role="region" aria-label="Biochemical mechanism matrix" tabIndex={0}>
-            <table className="mechanism-table">
-              <caption className="sr-only">How lysis, charge shielding and precipitation help reveal strawberry DNA</caption>
-              <thead><tr><th scope="col">MECHANISM</th><th scope="col">WHAT DOES IT?</th><th scope="col">WHAT HAPPENS?</th><th scope="col">WHAT YOU NOTICE</th></tr></thead>
-              <tbody>
-                <tr><th scope="row"><span className="table-index">01</span><span className="mechanism-name">Lysis</span></th><td>Detergent</td><td>Disrupts the cell membrane and nuclear envelope. Mashing breaks up the tissue and cell walls.</td><td>DNA and other cell contents enter the liquid.</td></tr>
-                <tr><th scope="row"><span className="table-index">02</span><span className="mechanism-name">Charge shielding</span></th><td>Salt ions</td><td>Shield some of DNA’s negative charges, reducing repulsion between strands. The charge is not erased.</td><td>DNA strands can gather more readily.</td></tr>
-                <tr><th scope="row"><span className="table-index">03</span><span className="mechanism-name">Precipitation</span></th><td>Ice-cold ethanol</td><td>DNA is poorly soluble in cold ethanol; with salt present, it leaves the liquid as a precipitate.</td><td>Pale fibres form at the boundary between liquid layers.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="mechanism-footnote reveal"><span className="footnote-mark">i</span><p><b>One important distinction.</b> Detergent disrupts membranes; it does not dissolve the plant cell wall. In this method, mashing helps break up the tissue.</p></div>
-          <div className="mechanism-art-row reveal">
-            <Figure image="image-10-1.png" alt="Illustration of detergent disrupting a cell membrane and releasing cell contents." caption="01 / Membrane disruption" />
-            <Figure image="image-11-1.png" alt="Diagram showing salt ions shielding negative charges near DNA." caption="02 / Charge shielding" />
-            <Figure image="image-14-1.png" alt="Comparison of separated DNA strands with DNA gathered into a precipitate." caption="03 / DNA gathers" />
-          </div>
-          <div className="applications-block reveal">
-            <div className="applications-intro"><p className="eyebrow"><span>04</span> / BEYOND THE BEAKER</p><h3>DNA extraction opens up bigger questions.</h3><p>Once DNA is available for analysis, it can support crop research, species identification, diagnosis and forensic work.</p></div>
-            <div className="applications-grid">
-              <article className="application-card"><div className="application-copy"><span>FIELD APPLICATION 01</span><h4>Research &amp; farming</h4><p>DNA analysis supports sequencing, crop breeding and identifying species.</p></div><Figure image="image-19-1.jpg" alt="Laboratory analysis instrument shown in the PowerPoint’s DNA applications slide." caption="SOURCE DIAGRAM / DNA analysis in research" /></article>
-              <article className="application-card"><div className="application-copy"><span>FIELD APPLICATION 02</span><h4>Health &amp; forensics</h4><p>DNA analysis can support diagnosis and forensic identification.</p></div><Figure image="image-19-2.png" alt="Illustration of a DNA analysis readout from the PowerPoint’s applications slide." caption="SOURCE DIAGRAM / Analysis readout" /></article>
-            </div>
-          </div>
-        </section>
-
         <section className="starter-section" id="starter" aria-labelledby="starter-title">
           <div className="starter-inner section-wrap">
-            <div className="starter-topline"><p className="eyebrow eyebrow-light"><span>04</span> / STARTER</p><span className="starter-chip"><CircleHelp size={14} /> PREDICT BEFORE YOU REVEAL</span></div>
+            <div className="starter-topline"><p className="eyebrow eyebrow-light"><span>01</span> / STARTER</p><span className="starter-chip"><CircleHelp size={14} /> PREDICT BEFORE YOU REVEAL</span></div>
             <div className="starter-headline"><h2 id="starter-title">What gets <em>in the way?</em></h2><p>Before the practical, trace a route from the fruit tissue to the DNA inside the nucleus.</p></div>
             <button className="accordion-trigger starter-trigger" type="button" aria-expanded={starterOpen} aria-controls="starter-panel" onClick={() => setStarterOpen((open) => !open)}>
-              <span><b>{starterOpen ? "Close the starter" : "Open the starter"}</b><small>Cell anatomy · 2-minute prediction</small></span><span className="trigger-icon"><ChevronDown size={20} /></span>
+              <span><b>{starterOpen ? "Close the starter" : "Open the starter"}</b><small>Think-pair-share · cell anatomy</small></span><span className="trigger-icon"><ChevronDown size={20} /></span>
             </button>
             <div className="starter-panel" id="starter-panel" hidden={!starterOpen}>
+              <section className="starter-ploidy" aria-labelledby="starter-ploidy-title">
+                <div className="starter-ploidy-context"><span>THINK · PAIR · SHARE</span><p id="starter-ploidy-title">Human cells are diploid (2n): they have two chromosome sets. Cultivated garden strawberries are octoploid (2n = 8x = 56), often simplified as eight sets (8n) in classroom materials.</p></div>
+                <MultipleChoiceCheckpoint
+                  id="starter-ploidy-check"
+                  kicker="STARTER · ADVANCED MULTIPLE CHOICE"
+                  prompt="From a molecular-isolation perspective, why is strawberry useful for a classroom extraction compared with human cells?"
+                  options={[
+                    "Their DNA is structurally stronger and less likely to break apart during physical mashing.",
+                    "Eight sets provide more genome copies than a diploid strawberry cell; together with soft tissue and many cells, this makes a useful visible classroom extract. Ploidy alone does not prove more DNA mass than a human cell, because genome size differs.",
+                    "Octoploid DNA does not dissolve in water, which eliminates the need to filter out cellular pulp.",
+                  ]}
+                  correctIndex={1}
+                  explanation="Eight chromosome sets mean more genome copies than in a diploid strawberry cell, and ripe fruit is easy to mash. The number of chromosome sets is not a direct measure of total DNA mass across species: genome size matters too."
+                />
+                <p className="pair-share-note">First choose an answer on your own. After checking it, compare your reasoning with a partner: which part is about ploidy, and which part is about the practical specimen?</p>
+              </section>
               <div className="starter-question"><span className="question-number">Q1</span><div><h3>Which layer does detergent <em>not</em> break?</h3><p>Tap your prediction. Then reveal the explanation.</p></div></div>
               <div className="layer-options" role="group" aria-label="Choose the cell layer detergent does not break">
                 {["Cell wall", "Cell membrane", "Nuclear envelope"].map((layer) => <button className={`layer-option ${starterLayer === layer ? "selected" : ""}`} key={layer} type="button" aria-pressed={starterLayer === layer} onClick={() => { setStarterLayer(layer); setStarterRevealed(false); }}>{layer}<span>{starterLayer === layer && <Check size={15} />}</span></button>)}
@@ -460,6 +428,92 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="objectives section-wrap" id="objectives" aria-labelledby="objectives-title">
+          <div className="section-heading objectives-heading reveal">
+            <p className="eyebrow"><span>02</span> / LEARNING OBJECTIVES</p>
+            <h2 id="objectives-title">Three goals.<br /><em>One tiny cell.</em></h2>
+          </div>
+          <div className="objective-grid" aria-label="Three lesson goals">
+            <article className="objective-card reveal"><span className="objective-number">01</span><span className="objective-icon"><Dna size={20} /></span><h3>Make DNA visible</h3><p>Extract pale, stringy material from strawberry cells and describe what you observe.</p><span className="objective-tag">OBSERVE</span></article>
+            <article className="objective-card reveal"><span className="objective-number">02</span><span className="objective-icon"><FlaskConical size={20} /></span><h3>Explain the reagents</h3><p>Connect detergent, salt and cold ethanol to the job each does in the extraction.</p><span className="objective-tag">EXPLAIN</span></article>
+            <article className="objective-card reveal"><span className="objective-number">03</span><span className="objective-icon"><ShieldCheck size={20} /></span><h3>Work safely</h3><p>Follow the method carefully, identify hazards and assess what the result can—and cannot—show.</p><span className="objective-tag">EVALUATE</span></article>
+          </div>
+          <p className="objective-summary reveal">By the end, you’ll be able to explain what each step does—not just follow a recipe.</p>
+          <div className="vocabulary-section reveal" aria-labelledby="vocab-title">
+            <div className="glossary-heading"><p className="vocab-label" id="vocab-title">WORDS TO KNOW</p><p>Seven useful terms—English, Traditional Chinese, and what each means in this practical.</p></div>
+            <div className="vocabulary-grid">
+              <article className="vocab-card"><h3>Lysis <span className="term-translation" lang="zh-Hant">（細胞裂解）</span></h3><p>Releasing cell contents by disrupting membranes. Detergent disrupts the cell membrane and nuclear envelope; mashing helps break up tissue and cell walls.</p></article>
+              <article className="vocab-card"><h3>Filtration <span className="term-translation" lang="zh-Hant">（過濾）</span></h3><p>Separating coarse pulp, cell-wall fragments and debris from liquid. Soluble DNA and other dissolved materials can pass into the filtrate; it is not purified DNA.</p></article>
+              <article className="vocab-card"><h3>Precipitation <span className="term-translation" lang="zh-Hant">（沉澱）</span></h3><p>DNA leaves the liquid as a visible solid when salt and alcohol change the solution conditions. Pale fibres collect at the boundary; the extract may contain other materials.</p></article>
+              <article className="vocab-card"><h3>Spooling <span className="term-translation" lang="zh-Hant">（纏繞收集）</span></h3><p>Winding aggregated, visible DNA-rich fibres around a clean glass rod—or a paperclip if the teacher permits—to collect them from the liquid boundary.</p></article>
+              <article className="vocab-card"><h3>Octoploid <span className="term-translation" lang="zh-Hant">（八倍體）</span></h3><p>Having eight chromosome sets. Cultivated garden strawberry is octoploid (2n = 8x = 56); the number of sets alone does not compare total DNA mass between species.</p></article>
+              <article className="vocab-card"><h3>Phospholipid Bilayer <span className="term-translation" lang="zh-Hant">（磷脂雙分子層）</span></h3><p>A double layer of phospholipid molecules forming cell and nuclear membranes. Amphipathic detergent molecules disrupt these membranes; they do not dissolve the plant cell wall.</p></article>
+              <article className="vocab-card"><h3>Solubility <span className="term-translation" lang="zh-Hant">（溶解度）</span></h3><p>The ability of a substance to dissolve in a solvent. DNA dissolves in water, but becomes much less soluble in cold alcohol when salt is present, so it can precipitate.</p></article>
+            </div>
+          </div>
+        </section>
+
+        <section className="science-section" id="science" aria-labelledby="science-title">
+          <div className="section-wrap science-wrap">
+            <div className="section-heading section-heading-row reveal">
+              <div><p className="eyebrow"><span>03</span> / THE SCIENCE</p><h2 id="science-title">Know the <em>why.</em></h2></div>
+            </div>
+            <div className="science-tabs" role="tablist" aria-label="Explore the science">
+              {scienceTabs.map((tab, index) => (
+                <button
+                  className={`science-tab ${activeTab === tab.id ? "is-active" : ""}`}
+                  id={`science-tab-${tab.id}`}
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === tab.id}
+                  aria-controls="science-panel"
+                  tabIndex={activeTab === tab.id ? 0 : -1}
+                  onClick={() => setActiveTab(tab.id)}
+                  onKeyDown={(event) => handleTabKeyDown(event, index)}
+                >
+                  <span>0{index + 1}</span>{tab.label}<ArrowUpRight size={16} />
+                </button>
+              ))}
+            </div>
+            <div className="science-panel reveal" id="science-panel" role="tabpanel" aria-labelledby={`science-tab-${activeTab}`} tabIndex={0}>
+              <div className="science-panel-copy">
+                <p className="eyebrow">{selectedScience.kicker}</p>
+                <h3>{selectedScience.title}</h3>
+                <p>{selectedScience.copy}</p>
+                {activeTab === "why" && <div className="octoploid-callout"><strong>8<span>x</span></strong><span><b>OCTOPLOID</b><small>eight chromosome sets<br />in each cell</small></span><p>Eight sets distinguish garden strawberries from diploid strawberries. Total DNA mass still depends on genome size, so 8x alone is not a direct mass comparison with human cells.</p></div>}
+                {activeTab === "how" && <div className="science-mini-note"><Sparkles size={16} /><span><b>Key idea</b> The white material is a crude extract, not pure DNA.</span></div>}
+              </div>
+              <Figure image={selectedScience.image} source={selectedScience.source} alt={selectedScience.alt} caption={selectedScience.caption} className="science-figure" />
+            </div>
+          </div>
+        </section>
+
+        <section className="mechanisms section-wrap" id="mechanisms" aria-labelledby="mechanism-title">
+          <div className="section-heading section-heading-row reveal">
+            <div className="mechanisms-heading-copy"><p className="eyebrow"><span>04</span> / REAGENT LOGIC</p><h2 id="mechanism-title">The chemistry behind the <em>fibres.</em></h2><p className="section-intro">Three mechanisms help move DNA from a cell into a visible, collectable form.</p></div>
+          </div>
+          <div className="mechanism-table-wrap reveal" role="region" aria-label="Biochemical mechanism matrix" tabIndex={0}>
+            <table className="mechanism-table">
+              <caption className="sr-only">How lysis, charge shielding and precipitation help reveal strawberry DNA</caption>
+              <thead><tr><th scope="col">MECHANISM</th><th scope="col">WHAT DOES IT?</th><th scope="col">WHAT HAPPENS?</th><th scope="col">WHAT YOU NOTICE</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><span className="table-index">01</span><span className="mechanism-name">Lysis</span></th><td>Detergent</td><td>Disrupts the cell membrane and nuclear envelope. Mashing breaks up the tissue and cell walls.</td><td>DNA and other cell contents enter the liquid.</td></tr>
+                <tr><th scope="row"><span className="table-index">02</span><span className="mechanism-name">Charge shielding</span></th><td>Salt ions</td><td>Shield some of DNA’s negative charges, reducing repulsion between strands. The charge is not erased.</td><td>DNA strands can gather more readily.</td></tr>
+                <tr><th scope="row"><span className="table-index">03</span><span className="mechanism-name">Precipitation</span></th><td>Ice-cold ethanol</td><td>DNA is poorly soluble in cold ethanol; with salt present, it leaves the liquid as a precipitate.</td><td>Pale fibres form at the boundary between liquid layers.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="mechanism-footnote reveal"><span className="footnote-mark">i</span><p><b>One important distinction.</b> Detergent disrupts membranes; it does not dissolve the plant cell wall. In this method, mashing helps break up the tissue.</p></div>
+          <div className="mechanism-art-row reveal">
+            <Figure image="image-10-1.png" alt="Illustration of detergent disrupting a cell membrane and releasing cell contents." caption="01 / Membrane disruption" />
+            <Figure image="image-11-1.png" alt="Diagram showing salt ions shielding negative charges near DNA." caption="02 / Charge shielding" />
+            <Figure image="image-14-1.png" alt="Comparison of separated DNA strands with DNA gathered into a precipitate." caption="03 / DNA gathers" />
+          </div>
+        </section>
+
+
+
         <section className="safety-section section-wrap" id="safety" aria-labelledby="safety-title">
           <div className="section-heading section-heading-row reveal">
             <div className="safety-heading-copy"><p className="eyebrow"><span>05</span> / SAFETY CHECK</p><h2 id="safety-title">Good science starts <em>carefully.</em></h2><p className="section-intro">Read the control before handling each material. Follow your teacher’s local instructions.</p></div>
@@ -469,7 +523,7 @@ export default function Home() {
               <caption className="sr-only">Hazards and control measures for the strawberry DNA extraction practical</caption>
               <thead><tr><th scope="col">MATERIAL / HAZARD</th><th scope="col">RISK</th><th scope="col">CONTROL MEASURE</th><th scope="col">CHECK</th></tr></thead>
               <tbody>
-                <tr><th scope="row"><span className="risk-icon risk-icon-amber"><FlaskConical size={18} /></span><span className="risk-material">Cold ethanol<small>Flammable liquid / vapour</small></span></th><td><span className="risk-pill amber">Flammable</span><p>Vapour may irritate.</p></td><td>Keep capped, cold and away from flames. Use only as directed by the teacher.</td><td><span className="control-check"><Check size={15} /> No ignition sources</span></td></tr>
+                <tr><th scope="row"><span className="risk-icon risk-icon-amber"><FlaskConical size={18} /></span><span className="risk-material"><span className="risk-material-name">Cold ethanol</span><small>Flammable liquid / vapour</small></span></th><td><span className="risk-pill amber">Flammable</span><p>Vapour may irritate.</p></td><td>Keep capped, cold and away from flames. Use only as directed by the teacher.</td><td><span className="control-check"><Check size={15} /> No ignition sources</span></td></tr>
                 <tr><th scope="row"><span className="risk-icon risk-icon-blue"><Sparkles size={18} /></span><span className="risk-material">Detergent<small>Eye / skin irritant</small></span></th><td><span className="risk-pill blue">Irritant</span><p>Splash contact can irritate.</p></td><td>Wear eye protection. Rinse splashes promptly with plenty of water and tell the teacher.</td><td><span className="control-check"><Check size={15} /> Goggles on</span></td></tr>
                 <tr><th scope="row"><span className="risk-icon risk-icon-red"><ShieldCheck size={18} /></span><span className="risk-material">Glass and spills<small>Breakage / wet surfaces</small></span></th><td><span className="risk-pill red">Cuts / slips</span><p>Broken glass can cut; liquid can make floors slippery.</p></td><td>Check glassware before use. Report breakages; clean spills promptly using your class procedure.</td><td><span className="control-check"><Check size={15} /> Clear bench</span></td></tr>
               </tbody>
@@ -493,27 +547,52 @@ export default function Home() {
             <figure className="process-ribbon reveal"><img src={`${media}image-16-1.png`} alt="Five-stage summary: mash strawberry, add detergent and salt, filter pulp, layer ice-cold ethanol and spool DNA fibres." loading="lazy" /><figcaption>THE EXTRACTION / From fruit to fibres, at a glance</figcaption></figure>
             <section className="demonstration reveal" aria-labelledby="video-title">
               <div className="demonstration-heading"><div><p className="eyebrow"><span>VIDEO</span> / PRACTICAL DEMONSTRATION</p><h3 id="video-title">Watch the layering<br />and spooling technique.</h3></div><p>Use the clip to observe how to pour the cold ethanol gently and collect fibres at the liquid boundary.</p></div>
-              <div className="video-frame"><iframe src="https://www.youtube.com/embed/W1DVEtzrl9g?feature=oembed" title="Strawberry DNA extraction demonstration: layering ethanol and spooling DNA fibres" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
-              <div className="video-foot"><span>POWERPOINT VIDEO LINK / YOUTUBE</span><a href="https://www.youtube.com/watch?v=W1DVEtzrl9g" target="_blank" rel="noreferrer">Open the video on YouTube <ArrowUpRight size={16} /></a></div>
+              <div className="video-frame"><iframe src="https://www.youtube.com/embed/2WpdGXrSEgQ" title="Strawberry DNA extraction demonstration: layering ethanol and spooling DNA fibres" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+              <div className="video-foot"><span>POWERPOINT VIDEO LINK / YOUTUBE</span><a href="https://www.youtube.com/watch?v=2WpdGXrSEgQ" target="_blank" rel="noreferrer">Open the video on YouTube <ArrowUpRight size={16} /></a></div>
             </section>
-            <ol className="timeline-list">
-            {steps.map((step) => (
-                <li className="timeline-step reveal" key={step.number}>
-                  <div className="timeline-rail"><span>{step.number}</span><i /></div>
-                  <article className="step-card">
-                    <div className="step-topline"><span className="step-label">{step.label}</span><span className="step-time">STEP {step.number}</span></div>
-                    <h3>{step.title}</h3>
-                    <ol className="step-instructions" aria-label={`Detailed instructions: ${step.label}`}>
-                      {step.instructions.map((instruction, index) => <li key={instruction}><span>{String(index + 1).padStart(2, "0")}</span><p>{instruction}</p></li>)}
-                    </ol>
-                    <div className="step-reason"><span>WHY IT MATTERS</span><p>{step.reason}</p></div>
-                    <div className="step-observe"><span>WHAT TO LOOK FOR</span><p>{step.lookFor}</p></div>
-                    <Figure image={step.image} source={step.source} alt={step.alt} caption={`STEP ${step.number} / ${step.label.toUpperCase()}`} className="step-figure" />
-                    <div className="step-check"><Check size={16} /><span><b>Bench check</b> {step.check}</span></div>
-                  </article>
-                </li>
-              ))}
-            </ol>
+            <div className="session-sequence">
+              <section className="lab-session" id="session-1" aria-labelledby="session-1-title">
+                <header className="lab-session-heading"><span>SESSION 01 / MASHING &amp; LYSIS</span><h3 id="session-1-title">Break up the tissue. Release the cell contents.</h3><p>Complete mini-steps 01–02, then pause to explain what detergent and salt do.</p></header>
+                <ol className="timeline-list">{steps.slice(0, 2).map((step) => <PracticalStepCard step={step} key={step.number} />)}</ol>
+                <div className="checkpoint-session"><div className="checkpoint-session-heading"><span>AFTER SESSION 01</span><h4>Check your membrane and charge model.</h4></div><div className="checkpoint-session-grid">
+                  <MultipleChoiceCheckpoint id="session-1-soap" kicker="Q1 · MULTIPLE CHOICE" prompt="At a molecular level, how does dish soap physically disrupt the strawberry cell and nuclear membranes to release the DNA?" options={[
+                    "The soap functions as a strong chemical acid that digests genomic proteins.",
+                    "Amphipathic soap molecules enter and disrupt the fatty phospholipid bilayers, helping the membranes break open.",
+                    "The soap creates osmotic pressure that forces water into the cell until it bursts.",
+                  ]} correctIndex={1} explanation="A soap molecule is amphipathic: one part associates with water and another with membrane lipids. Detergent disrupts the cell membrane and nuclear envelope. It does not dissolve the plant cell wall."
+                  />
+                  <ShortAnswerCheckpoint id="session-1-salt" kicker="Q2 · SHORT-ANSWER CHALLENGE" prompt="Why is table salt (NaCl) added to the lysis buffer? How do Na⁺ ions interact with the electrical charge of DNA?" placeholder="Write one or two sentences about the DNA backbone and strand repulsion…" modelAnswer="DNA’s phosphate backbone carries negative charges. Sodium ions partly shield these charges, reducing repulsion between DNA strands. When cold ethanol is added later, this charge screening helps the DNA molecules aggregate and precipitate. Salt does not make DNA positively charged." />
+                </div></div>
+              </section>
+
+              <section className="lab-session" id="session-2" aria-labelledby="session-2-title">
+                <header className="lab-session-heading"><span>SESSION 02 / FILTRATION</span><h3 id="session-2-title">Separate coarse pulp from liquid.</h3><p>Complete mini-step 03, then classify what stays in the filter and what enters the filtrate.</p></header>
+                <ol className="timeline-list" start={3}>{steps.slice(2, 3).map((step) => <PracticalStepCard step={step} key={step.number} />)}</ol>
+                <div className="checkpoint-session"><div className="checkpoint-session-heading"><span>AFTER SESSION 02</span><h4>Sort the mixture, then predict a filter failure.</h4></div><div className="checkpoint-session-grid checkpoint-session-grid-stack">
+                  <FiltrationSortCheckpoint />
+                  <ShortAnswerCheckpoint id="session-2-filter-breach" kicker="Q2 · CRITICAL THINKING" prompt="If a student squeezes the filter hard enough to tear it, how could this affect later observations of the precipitate under a microscope?" placeholder="Explain what extra material could enter the filtrate and why it matters…" modelAnswer="A tear can let coarse pulp and cell-wall fragments enter the filtrate. Large debris and proteins attached to it may contaminate the precipitate, making pale fibres harder to distinguish from cell fragments under a microscope. The extract is already crude, and a coffee filter cannot prove DNA purity; soluble proteins may pass through even when the filter is intact." selfCheckPrompt="Did you mention both cell debris and how contamination makes the result harder to interpret?" />
+                </div></div>
+              </section>
+
+              <section className="lab-session" id="session-3" aria-labelledby="session-3-title">
+                <header className="lab-session-heading"><span>SESSION 03 / PRECIPITATION &amp; SPOOLING</span><h3 id="session-3-title">Make fibres visible. Collect them carefully.</h3><p>Complete mini-steps 04–05. Keep the liquid boundary clear and look for pale, stringy material.</p></header>
+                <ol className="timeline-list" start={4}>{steps.slice(3).map((step) => <PracticalStepCard step={step} key={step.number} />)}</ol>
+                <div className="checkpoint-session"><div className="checkpoint-session-heading"><span>AFTER SESSION 03</span><h4>Explain the precipitation and test one variable.</h4></div><div className="checkpoint-session-grid">
+                  <MultipleChoiceCheckpoint id="session-3-ethanol" kicker="Q1 · MULTIPLE CHOICE" prompt="Why does adding ice-cold ethanol cause DNA to precipitate from the filtrate?" options={[
+                    "DNA mutates into a plastic-like polymer when exposed to alcohol.",
+                    "Ethanol makes DNA less soluble; with salt screening phosphate-charge repulsion, DNA molecules aggregate and precipitate.",
+                    "The cold alcohol freezes all the water and traps DNA inside ice crystals.",
+                  ]} correctIndex={1} explanation="Ethanol is a poorer solvent for DNA than water and lowers the solution’s dielectric constant. Salt ions screen repulsion between the negatively charged phosphate groups. The DNA-rich material aggregates at the liquid boundary; ethanol is not ‘highly polar’ and does not digest the cell wall."
+                  />
+                  <MultipleChoiceCheckpoint id="session-3-temperature" kicker="Q2 · DATA INTERPRETATION / VARIABLE ANALYSIS" prompt="Suppose room-temperature rubbing alcohol is used instead of the teacher-specified ice-cold ethanol. What is the most likely outcome?" options={[
+                    "DNA precipitates at exactly the same rate regardless of temperature.",
+                    "Precipitation may be slower or less visible because DNA is more soluble in warmer alcohol; alcohol type and concentration also matter.",
+                    "Warm alcohol melts the DNA sugar–phosphate backbone.",
+                  ]} correctIndex={1} explanation="Cold alcohol generally helps DNA precipitate visibly. The result also depends on alcohol type and concentration, so use the teacher-specified, ice-cold ethanol rather than substituting rubbing alcohol."
+                  />
+                </div></div>
+              </section>
+            </div>
             <section className="method-checks reveal" aria-labelledby="method-check-title">
               <div className="method-checks-heading">
                 <div><p className="eyebrow eyebrow-light"><span>PAUSE &amp; PREDICT</span> / RETRIEVAL CHECK</p><h3 id="method-check-title">Think it through.<br /><em>Then check.</em></h3><p>Choose one answer for each question. The answer and explanation stay hidden until you select “Check answer”.</p></div>
@@ -550,10 +629,22 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="applications-section section-wrap" id="applications" aria-labelledby="applications-title">
+          <div className="applications-block reveal">
+            <div className="applications-intro"><p className="eyebrow"><span>07</span> / BEYOND THE BEAKER</p><h3 id="applications-title">DNA extraction opens up bigger questions.</h3><p>Once DNA is available for analysis, it can support crop research, species identification, diagnosis and forensic work.</p></div>
+            <div className="applications-grid">
+              <article className="application-card"><div className="application-copy"><span>FIELD APPLICATION 01</span><h4>Research &amp; farming</h4><p>DNA analysis supports sequencing, crop breeding and identifying species.</p></div><Figure image="image-19-1.jpg" alt="Laboratory analysis instrument shown in the PowerPoint’s DNA applications slide." caption="DNA ANALYSIS / Research and crop science" /></article>
+              <article className="application-card"><div className="application-copy"><span>FIELD APPLICATION 02</span><h4>Health &amp; forensics</h4><p>DNA analysis can support diagnosis and forensic identification.</p></div><Figure image="image-19-2.png" alt="Illustration of a DNA analysis readout from the PowerPoint’s applications slide." caption="DNA EVIDENCE / Analysis readout" /></article>
+            </div>
+          </div>
+        </section>
+
+
+
         <section className="plenary-section" id="plenary" aria-labelledby="plenary-title">
           <div className="section-wrap plenary-wrap">
             <div className="section-heading section-heading-row reveal">
-              <div><p className="eyebrow eyebrow-light"><span>07</span> / PLENARY</p><h2 id="plenary-title">Who <em>am I?</em></h2></div>
+              <div><p className="eyebrow eyebrow-light"><span>08</span> / PLENARY</p><h2 id="plenary-title">Who <em>am I?</em></h2></div>
               <p className="section-intro">Four clues. Tap “Reveal answer” when you’re ready to check your recall.</p>
             </div>
             <div className="who-grid">
@@ -570,15 +661,15 @@ export default function Home() {
             <div className="final-quiz reveal">
               <div className="final-quiz-heading"><span className="quiz-symbol"><CircleHelp size={21} /></span><div><p className="eyebrow eyebrow-light">LAST CHECK / 01</p><h3>Why does cold ethanol make DNA visible?</h3></div></div>
               <div className="quiz-options" role="group" aria-label="Choose why cold ethanol makes DNA visible">
-                {["DNA stays dissolved in cold ethanol.", "Ethanol digests the cell wall.", "Ethanol turns histones into crystals.", "Cold ethanol makes DNA precipitate."].map((answer, index) => (
-                  <button className={`quiz-option ${quizChoice === answer ? "selected" : ""} ${quizSubmitted && answer === "Cold ethanol makes DNA precipitate." ? "correct" : ""}`} key={answer} type="button" aria-pressed={quizChoice === answer} onClick={() => { setQuizChoice(answer); setQuizSubmitted(false); }}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>{answer}{quizSubmitted && answer === "Cold ethanol makes DNA precipitate." && <Check size={16} />}
+                {["DNA dissolves more readily in cold ethanol than in water.", "Ethanol digests the plant cell wall.", "Cold ethanol turns histone proteins into crystals.", "With salt present, cold ethanol reduces DNA solubility so it aggregates as pale fibres."].map((answer, index) => (
+                  <button className={`quiz-option ${quizChoice === answer ? "selected" : ""} ${quizSubmitted && answer === "With salt present, cold ethanol reduces DNA solubility so it aggregates as pale fibres." ? "correct" : ""}`} key={answer} type="button" aria-pressed={quizChoice === answer} onClick={() => { setQuizChoice(answer); setQuizSubmitted(false); }}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>{answer}{quizSubmitted && answer === "With salt present, cold ethanol reduces DNA solubility so it aggregates as pale fibres." && <Check size={16} />}
                   </button>
                 ))}
               </div>
               <div className="quiz-submit-row">
                 <button className="button button-primary" type="button" disabled={!quizChoice} onClick={() => setQuizSubmitted(true)}>Check my answer <ArrowRight size={16} /></button>
-                {quizSubmitted && <p className={`quiz-feedback ${quizChoice === "Cold ethanol makes DNA precipitate." ? "is-correct" : "is-incorrect"}`} role="status" aria-live="polite"><strong>{quizChoice === "Cold ethanol makes DNA precipitate." ? "Correct." : "Not quite — the answer is:"}</strong> With salt present, DNA is poorly soluble in cold ethanol, so it leaves the solution as a precipitate. Pale fibres collect at the boundary between the ethanol and filtrate layers.</p>}
+                {quizSubmitted && <p className={`quiz-feedback ${quizChoice === "With salt present, cold ethanol reduces DNA solubility so it aggregates as pale fibres." ? "is-correct" : "is-incorrect"}`} role="status" aria-live="polite"><strong>{quizChoice === "With salt present, cold ethanol reduces DNA solubility so it aggregates as pale fibres." ? "Correct." : "Not quite — the answer is:"}</strong> Ethanol is a poorer solvent for DNA than water. With salt ions screening some phosphate-charge repulsion, DNA aggregates and precipitates; pale DNA-rich fibres collect at the ethanol–filtrate boundary.</p>}
               </div>
             </div>
             <div className="troubleshoot reveal">
@@ -596,6 +687,7 @@ export default function Home() {
         <div className="footer-inner"><a className="brand brand-footer" href="#top"><span className="brand-mark"><Leaf size={17} /></span><span className="brand-name">FIELD / NOTES <small>STRAWBERRY DNA EXTRACTION</small></span></a><p>Look closely. Explain each step. Keep the science honest.</p><a className="back-top" href="#top">BACK TO TOP <ArrowUpRight size={14} /></a></div>
         <div className="footer-bottom"><span>CLASSROOM PRACTICAL / 01</span><span>BUILT FROM YOUR STRAWBERRY DNA SLIDES</span><span>8N · OCTOPLOID</span></div>
       </footer>
+      </div>
     </div>
   );
 }
