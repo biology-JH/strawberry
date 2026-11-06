@@ -7,6 +7,7 @@ import {
   ChevronDown,
   CircleHelp,
   Dna,
+  Download,
   FlaskConical,
   Leaf,
   ShieldCheck,
@@ -536,6 +537,17 @@ export default function Home() {
             <div className="section-heading section-heading-row reveal">
               <div className="method-heading-copy"><p className="eyebrow"><span>06</span> / THE PRACTICAL</p><h2 id="method-title">Five moves to <em>visible DNA.</em></h2><p className="section-intro">Start with the kit checklist, then follow each numbered mini-step in order. Keep the filtrate and ethanol layers separate. Look for pale, stringy fibres only after cold ethanol meets the filtrate.</p></div>
             </div>
+            <aside className="worksheet-download reveal" aria-labelledby="worksheet-download-title">
+              <span className="worksheet-download-icon" aria-hidden="true"><Download size={19} /></span>
+              <div className="worksheet-download-copy">
+                <p className="eyebrow"><span>OFFLINE COPY</span> / STUDENT WORKSHEET</p>
+                <h3 id="worksheet-download-title">Take a blank worksheet to the bench.</h3>
+                <p>Print or save the response sheet, materials checklist and observation prompts for use without the website.</p>
+              </div>
+              <a className="button button-primary worksheet-download-button" href="/strawberry-dna-student-worksheet.pdf" download="strawberry-dna-extraction-student-worksheet.pdf" aria-label="Download the Strawberry DNA extraction student worksheet as a PDF">
+                Download worksheet <Download size={16} aria-hidden="true" />
+              </a>
+            </aside>
             <section className="materials-prep reveal" aria-labelledby="prep-title">
               <div className="materials-prep-heading"><p className="eyebrow"><span>BEFORE STEP 01</span> / SET UP</p><h3 id="prep-title">Get every material ready first.</h3><p>Prepare the buffer before it touches the fruit. Measure slowly and keep the work area clear.</p></div>
               <div className="prep-inventory">
