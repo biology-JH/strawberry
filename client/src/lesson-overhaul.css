@@ -300,16 +300,20 @@ body .site-shell.site-frame .materials-prep-heading > p:last-child { color: #657
 body .site-shell.site-frame .demonstration-heading > p { max-width: 400px; margin: 0; color: #647168; font-size: 14px; }
 .video-frame { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #e8e8df; border-radius: 9px; }
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.worksheet-download { margin: 20px 0 24px; padding: 17px 18px; display: grid; grid-template-columns: 42px minmax(0,1fr) auto; align-items: center; gap: 14px; background: #fffdfa; border: 1px solid #e5ddd2; border-left: 4px solid var(--berry-deep); border-radius: 12px; box-shadow: 0 6px 18px rgba(46,56,45,.045); }
+.worksheet-download { margin: 20px 0 24px; padding: 17px 18px; display: grid; grid-template-columns: 42px minmax(0,1fr); align-items: center; gap: 14px; background: #fffdfa; border: 1px solid #e5ddd2; border-left: 4px solid var(--berry-deep); border-radius: 12px; box-shadow: 0 6px 18px rgba(46,56,45,.045); }
 .worksheet-download-icon { width: 42px; height: 42px; display: grid; place-items: center; color: var(--berry-deep); background: #f8eae5; border-radius: 10px; }
 .worksheet-download-copy .eyebrow { margin: 0 0 4px; }
 .worksheet-download-copy h3 { margin: 0; color: #35473b; font-size: clamp(17px, 1.8vw, 22px); line-height: 1.25; }
 body .site-shell.site-frame .worksheet-download-copy p:not(.eyebrow) { margin: 4px 0 0; color: #5b6c60; font-size: 13px; line-height: 1.5; }
+.worksheet-download-actions { grid-column: 2 / -1; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 2px; }
 .worksheet-download-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; text-decoration: none; }
+.worksheet-download-button-secondary { color: var(--berry-deep); background: #fff; border: 1px solid #d9c5c8; }
+.worksheet-download-button-secondary:hover:not(:disabled) { color: #fff; background: var(--berry-deep); }
 @media (max-width: 760px) {
   .worksheet-download { grid-template-columns: 38px minmax(0,1fr); gap: 11px; padding: 15px; }
   .worksheet-download-icon { width: 38px; height: 38px; }
-  .worksheet-download-button { grid-column: 1 / -1; justify-self: start; }
+  .worksheet-download-actions { grid-column: 1 / -1; }
+  .worksheet-download-button { white-space: normal; }
 }
 .video-foot { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #718075; font: 10px "DM Mono", monospace; }
 .video-foot a { display: inline-flex; align-items: center; gap: 5px; color: var(--berry-deep); font: 600 12px "DM Sans", sans-serif; text-decoration: none; }

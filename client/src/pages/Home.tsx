@@ -540,13 +540,18 @@ export default function Home() {
             <aside className="worksheet-download reveal" aria-labelledby="worksheet-download-title">
               <span className="worksheet-download-icon" aria-hidden="true"><Download size={19} /></span>
               <div className="worksheet-download-copy">
-                <p className="eyebrow"><span>OFFLINE COPY</span> / STUDENT WORKSHEET</p>
-                <h3 id="worksheet-download-title">Take a blank worksheet to the bench.</h3>
-                <p>Print or save the response sheet, materials checklist and observation prompts for use without the website.</p>
+                <p className="eyebrow"><span>OFFLINE COPIES</span> / STUDENT WORKSHEETS</p>
+                <h3 id="worksheet-download-title">Take a worksheet to the bench.</h3>
+                <p>Choose the English sheet or a bilingual copy with Traditional Chinese translations beside key words.</p>
               </div>
-              <a className="button button-primary worksheet-download-button" href="/strawberry-dna-student-worksheet.pdf" download="strawberry-dna-extraction-student-worksheet.pdf" aria-label="Download the Strawberry DNA extraction student worksheet as a PDF">
-                Download worksheet <Download size={16} aria-hidden="true" />
-              </a>
+              <div className="worksheet-download-actions" aria-label="Choose a worksheet version">
+                <a className="button button-primary worksheet-download-button" href="/strawberry-dna-student-worksheet.pdf" download="strawberry-dna-extraction-student-worksheet.pdf" aria-label="Download the English Strawberry DNA extraction student worksheet as a PDF">
+                  English PDF <Download size={16} aria-hidden="true" />
+                </a>
+                <a className="button worksheet-download-button worksheet-download-button-secondary" href="/strawberry-dna-student-worksheet-bilingual.pdf" download="strawberry-dna-extraction-student-worksheet-bilingual.pdf" aria-label="Download the bilingual Strawberry DNA extraction student worksheet with Traditional Chinese keyword translations as a PDF">
+                  Bilingual PDF · 繁體中文 <Download size={16} aria-hidden="true" />
+                </a>
+              </div>
             </aside>
             <section className="materials-prep reveal" aria-labelledby="prep-title">
               <div className="materials-prep-heading"><p className="eyebrow"><span>BEFORE STEP 01</span> / SET UP</p><h3 id="prep-title">Get every material ready first.</h3><p>Prepare the buffer before it touches the fruit. Measure slowly and keep the work area clear.</p></div>
