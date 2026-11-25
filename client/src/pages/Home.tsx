@@ -364,10 +364,15 @@ export default function Home() {
         <section className="hero" id="top" aria-labelledby="hero-title">
           <figure className="hero-photo-banner">
             <img src={`${pdfMedia}pdf-header-lab.jpg`} alt="Wide laboratory bench with strawberries, a beaker of crushed fruit, a test tube and glassware." fetchPriority="high" />
-            <div className="hero-copy hero-overlay-copy">
+            <figcaption><span>LAB NOTE 001 / STRAWBERRY DNA EXTRACTION</span><span>OCTOPLOID / 8n</span></figcaption>
+          </figure>
+          <div className="hero-intro section-wrap">
+            <div className="hero-intro-copy">
               <p className="eyebrow eyebrow-light"><span className="eyebrow-dot" /> FIELD GUIDE 01 <span className="eyebrow-divider">/</span> DNA EXTRACTION</p>
               <h1 id="hero-title">A berry full<br />of <em>instructions.</em></h1>
-              <p className="hero-deck">From crushed fruit to pale DNA fibres, follow the science—not just the recipe.</p>
+            </div>
+            <div className="hero-intro-detail">
+              <p className="hero-deck">Unlock the code inside a strawberry. Follow the science from crushed fruit to visible, pale DNA fibres.</p>
               <div className="hero-actions">
                 <a className="button button-primary" href="#science">Explore the science <ArrowRight size={16} /></a>
                 <a className="button button-ghost" href="#method">Jump to the method <ArrowDown size={15} /></a>
@@ -377,8 +382,7 @@ export default function Home() {
                 <span><ShieldCheck size={16} /> Teacher-supervised</span>
               </div>
             </div>
-            <figcaption><span>LAB NOTE 001 / STRAWBERRY DNA EXTRACTION</span><span>OCTOPLOID / 8n</span></figcaption>
-          </figure>
+          </div>
         </section>
 
         <section className="starter-section" id="starter" aria-labelledby="starter-title">
